@@ -53,81 +53,27 @@ function App() {
           </label>
         </>
         </PopupWithForm>
-      {/* <div className="popup popup_type_edit-profile">
-        <div className="popup__container">
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <form
-            className="popup__form popup__form_type_edit-profile"
-            name="editUserInfo"
-          >
-            <label className="popup__input-element">
-              <input
-                type="text"
-                placeholder="Ваше имя"
-                className="popup__input popup__input_type_profile-name"
-                id="input-profile-name"
-                name="nameUser"
-                required
-                min={2}
-                max={40}
-              />
-              <span
-                className="popup__input-error"
-                id="input-profile-name-error"
-              ></span>
-            </label>
-            <label className="popup__input-element">
-              <input
-                type="text"
-                placeholder="Чем занимаетесь"
-                className="popup__input popup__input_type_profile-job"
-                id="input-profile-job"
-                name="infoUser"
-                required
-                min={2}
-                max={200}
-              />
-              <span
-                className="popup__input-error"
-                id="input-profile-job-error"
-              ></span>
-            </label>
-            <button className="popup__submit-button" type="submit">Сохранить</button>
-          </form>
-          <button
-            className="popup__close"
-            type="button"
-          ></button>
-        </div>
-      </div> */}
 
       {/* Popup edit user avatar */}
-      <div className="popup popup_type_edit-avatar">
-        <div className="popup__container">
-          <h2 className="popup__title">Обновить аватар</h2>
-          <form
-            className="popup__form popup__form_type_edit-avatar"
-            name="editAvatar"
-          >
-            <label className="popup__input-element">
-              <input
-                type="url"
-                placeholder="Ссылка на картинку"
-                className="popup__input popup__input_type_avatar-link"
-                id="input-avatar-link"
-                name="avatarUser"
-                required
-              />
-              <span className="popup__input-error" id="input-avatar-link-error"></span>
-            </label>
-            <button className="popup__submit-button" type="submit">Сохранить</button>
-          </form>
-          <button
-            className="popup__close"
-            type="button"
-          ></button>
-        </div>
-      </div>
+      <PopupWithForm
+        name = "edit-avatar"
+        title = "Обновить аватар"
+        textButton = "Сохранить"
+      >
+        <>
+          <label className="popup__input-element">
+            <input
+              type="url"
+              placeholder="Ссылка на картинку"
+              className="popup__input popup__input_type_avatar-link"
+              id="input-avatar-link"
+              name="avatarUser"
+              required
+            />
+            <span className="popup__input-error" id="input-avatar-link-error"></span>
+          </label>
+        </>
+      </PopupWithForm>
 
       {/* Popup add cards */}
       <div className="popup popup_type_add-card">
