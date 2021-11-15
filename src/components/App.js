@@ -1,6 +1,7 @@
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
 
 
 function App() {
@@ -12,11 +13,51 @@ function App() {
       <Footer />
 
       {/* Popup edit user info */}
-      <div className="popup popup_type_edit-profile">
+      <PopupWithForm
+        name = "edit-profile"
+        title = "Редактировать профиль"
+        textButton = "Сохранить"
+      >
+        <>
+          <label className="popup__input-element">
+            <input
+              type="text"
+              placeholder="Ваше имя"
+              className="popup__input popup__input_type_profile-name"
+              id="input-profile-name"
+              name="nameUser"
+              required
+              min={2}
+              max={40}
+            />
+            <span
+              className="popup__input-error"
+              id="input-profile-name-error"
+            ></span>
+          </label>
+          <label className="popup__input-element">
+            <input
+              type="text"
+              placeholder="Чем занимаетесь"
+              className="popup__input popup__input_type_profile-job"
+              id="input-profile-job"
+              name="infoUser"
+              required
+              min={2}
+              max={200}
+            />
+            <span
+              className="popup__input-error"
+              id="input-profile-job-error"
+            ></span>
+          </label>
+        </>
+        </PopupWithForm>
+      {/* <div className="popup popup_type_edit-profile">
         <div className="popup__container">
           <h2 className="popup__title">Редактировать профиль</h2>
           <form
-            className="popup__form popup__form_type_profile"
+            className="popup__form popup__form_type_edit-profile"
             name="editUserInfo"
           >
             <label className="popup__input-element">
@@ -58,7 +99,7 @@ function App() {
             type="button"
           ></button>
         </div>
-      </div>
+      </div> */}
 
       {/* Popup edit user avatar */}
       <div className="popup popup_type_edit-avatar">
@@ -93,7 +134,7 @@ function App() {
         <div className="popup__container">
           <h2 className="popup__title">Новое место</h2>
           <form
-            className="popup__form popup__form_type_card"
+            className="popup__form popup__form_type_add-card"
             name="addCards"
             noValidate
           >
@@ -133,18 +174,18 @@ function App() {
       {/* Popup delete card */}
       <div className="popup popup_type_delete-card">
         <div className="popup__container">
+          <h2 className="popup__title">Вы уверены?</h2>
           <form
-            className="popup__form"
+            className="popup__form popup__form_type_delete-card"
             name="addCards"
             noValidate
           >
-            <h2 className="popup__title">Вы уверены?</h2>
             <button className="popup__submit-button" type="submit">Да</button>
-            <button
-              className="popup__close"
-              type="button"
-            ></button>
           </form>
+          <button
+            className="popup__close"
+            type="button"
+          ></button>
         </div>
       </div>
 
