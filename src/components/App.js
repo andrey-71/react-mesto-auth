@@ -1,46 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+
 
 function App() {
   return (
     <div className="container">
-      {/* Header */}
-      <header className="header container__header">
-        <img
-          className="header__logo"
-          src="{%=require('./images/header-logo.svg')%}"
-          alt="Логотип Место"
-        />
-      </header>
 
-      {/* Content */}
-      <main className="content container__content">
-        {/* Profile */}
-        <section className="profile">
-          <div className="profile__user-data">
-            <button className="profile__edit-avatar" type="button">
-              <img
-                src="#"
-                alt="Фотография пользователя"
-                className="profile__avatar"
-              />
-            </button>
-            <div className="profile__info">
-              <h1 className="profile__name"></h1>
-              <p className="profile__job"></p>
-              <button className="profile__edit-button" type="button"></button>
-            </div>
-          </div>
-          <button className="profile__add-button" type="button"></button>
-        </section>
-        {/* Photo gallery */}
-        <section className="card-gallery content__card-gallery"></section>
-      </main>
-
-      {/* Footer */}
-      <footer className="footer container__footer">
-        <h2 className="footer__copyright">&copy; 2021 Mesto Russia</h2>
-      </footer>
+      <Header />
+      <Main />
+      <Footer />
 
       {/* Popup edit user info */}
       <div className="popup popup_type_edit-profile">
@@ -58,8 +27,8 @@ function App() {
                 id="input-profile-name"
                 name="nameUser"
                 required
-                minlength="2"
-                maxlength="40"
+                min={2}
+                max={40}
               />
               <span
                 className="popup__input-error"
@@ -74,8 +43,8 @@ function App() {
                 id="input-profile-job"
                 name="infoUser"
                 required
-                minlength="2"
-                maxlength="200"
+                min={2}
+                max={200}
               />
               <span
                 className="popup__input-error"
@@ -126,7 +95,7 @@ function App() {
           <form
             className="popup__form popup__form_type_card"
             name="addCards"
-            novalidate
+            noValidate
           >
             <label className="popup__input-element">
               <input
@@ -136,8 +105,8 @@ function App() {
                 id="input-card-name"
                 name="name"
                 required
-                minlength="2"
-                maxlength="30"
+                min={2}
+                max={30}
               />
               <span className="popup__input-error" id="input-card-name-error"></span>
             </label>
@@ -167,7 +136,7 @@ function App() {
           <form
             className="popup__form"
             name="addCards"
-            novalidate
+            noValidate
           >
             <h2 className="popup__title">Вы уверены?</h2>
             <button className="popup__submit-button" type="submit">Да</button>
