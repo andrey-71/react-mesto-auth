@@ -108,22 +108,11 @@ function App() {
       </PopupWithForm>
 
       {/* Popup delete card */}
-      <div className="popup popup_type_delete-card">
-        <div className="popup__container">
-          <h2 className="popup__title">Вы уверены?</h2>
-          <form
-            className="popup__form popup__form_type_delete-card"
-            name="addCards"
-            noValidate
-          >
-            <button className="popup__submit-button" type="submit">Да</button>
-          </form>
-          <button
-            className="popup__close"
-            type="button"
-          ></button>
-        </div>
-      </div>
+      <PopupWithForm
+        name = "delete-card"
+        title = "Вы уверены?"
+        textButton = "Да"
+      ></PopupWithForm>
 
       {/* Popup card view */}
       <div className="popup popup_type_card-view">
