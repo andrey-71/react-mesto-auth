@@ -76,46 +76,36 @@ function App() {
       </PopupWithForm>
 
       {/* Popup add cards */}
-      <div className="popup popup_type_add-card">
-        <div className="popup__container">
-          <h2 className="popup__title">Новое место</h2>
-          <form
-            className="popup__form popup__form_type_add-card"
-            name="addCards"
-            noValidate
-          >
-            <label className="popup__input-element">
-              <input
-                type="text"
-                placeholder="Название"
-                className="popup__input popup__input_type_card-name"
-                id="input-card-name"
-                name="name"
-                required
-                min={2}
-                max={30}
-              />
-              <span className="popup__input-error" id="input-card-name-error"></span>
-            </label>
-            <label className="popup__input-element">
-              <input
-                type="url"
-                placeholder="Ссылка на картинку"
-                className="popup__input popup__input_type_card-link"
-                id="input-card-link"
-                name="link"
-                required
-              />
-              <span className="popup__input-error" id="input-card-link-error"></span>
-            </label>
-            <button className="popup__submit-button" type="submit">Создать</button>
-          </form>
-          <button
-            className="popup__close"
-            type="button"
-          ></button>
-        </div>
-      </div>
+      <PopupWithForm
+        name = "add-card"
+        title = "Новое место"
+        textButton = "Создать"
+      >
+        <label className="popup__input-element">
+          <input
+            type="text"
+            placeholder="Название"
+            className="popup__input popup__input_type_card-name"
+            id="input-card-name"
+            name="name"
+            required
+            min={2}
+            max={30}
+          />
+          <span className="popup__input-error" id="input-card-name-error"></span>
+        </label>
+        <label className="popup__input-element">
+          <input
+            type="url"
+            placeholder="Ссылка на картинку"
+            className="popup__input popup__input_type_card-link"
+            id="input-card-link"
+            name="link"
+            required
+          />
+          <span className="popup__input-error" id="input-card-link-error"></span>
+        </label>
+      </PopupWithForm>
 
       {/* Popup delete card */}
       <div className="popup popup_type_delete-card">
