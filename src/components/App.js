@@ -2,6 +2,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 
 function App() {
@@ -114,18 +115,7 @@ function App() {
         textButton = "Да"
       ></PopupWithForm>
 
-      {/* Popup card view */}
-      <div className="popup popup_type_card-view">
-        <div className="popup__card-view-container">
-          <img src="#" alt="#" className="popup__card-view-photo"/>
-          <p className="popup__card-view-caption"></p>
-          <button
-            className="popup__close"
-            type="button"
-          ></button>
-        </div>
-      </div>
-
+      <ImagePopup />
 
       {/* Template card */}
       <template id="card-template">
