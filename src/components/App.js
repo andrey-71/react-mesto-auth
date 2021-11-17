@@ -6,11 +6,26 @@ import ImagePopup from './ImagePopup';
 
 
 function App() {
+
+  const handleEditAvatarClick = () => {
+    document.querySelector('.popup_type_edit-avatar').classList.add('popup_active');
+  }
+  const handleEditProfileClick = () => {
+    document.querySelector('.popup_type_edit-profile').classList.add('popup_active');
+  }
+  const handleAddPlaceClick = () => {
+    document.querySelector('.popup_type_add-card').classList.add('popup_active');
+  }
+
   return (
     <div className="container">
 
       <Header />
-      <Main />
+      <Main
+        onEditAvatar ={handleEditAvatarClick}
+        onEditProfile ={handleEditProfileClick}
+        onEditAvatar ={handleAddPlaceClick}
+      />
       <Footer />
 
       {/* Popup edit user info */}
