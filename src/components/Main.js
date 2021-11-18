@@ -13,9 +13,6 @@ function Main(props) {
       .then(([getUserInfo, getInitialCards]) => {
         setUserInfo(getUserInfo);
         setCards(getInitialCards);
-        // userInfo.setUserAvatar(getUserInfo);
-
-        // cardList.renderItems(getInitialCards);
       })
       .catch(err => console.log(`При загрузке данных с сервера произошла ошибка: ${err}`));
   }, [])
@@ -44,9 +41,11 @@ function Main(props) {
       <section className="card-gallery content__card-gallery">
           {cards.map((card, key) => (
             <Card
+              card = {card}
               name = {card.name}
               link = {card.link}
               likes = {card.likes.length}
+              onCardClick = {props.onCardClick}
               key = {key}
             />
           ))}

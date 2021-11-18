@@ -1,9 +1,19 @@
 import React from 'react';
 
 function Card(props) {
+
   return (
     <figure className="card">
-      <img src={props.link} alt={props.name} className="card__image"/>
+      <img
+        src={props.link}
+        alt={props.name}
+        className="card__image"
+        onClick={
+          function handleClick() {
+            props.onCardClick(props.card)
+          }
+        }
+      />
       <button className="card__delete" type="button"></button>
       <figcaption className="card__info">
         <h2 className="card__caption">{props.name}</h2>
