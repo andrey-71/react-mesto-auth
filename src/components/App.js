@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -6,15 +7,18 @@ import ImagePopup from './ImagePopup';
 
 
 function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  let [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  let [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
   const handleEditAvatarClick = () => {
-    document.querySelector('.popup_type_edit-avatar').classList.add('popup_active');
+    setIsEditAvatarPopupOpen(true);
   }
   const handleEditProfileClick = () => {
-    document.querySelector('.popup_type_edit-profile').classList.add('popup_active');
+    setIsEditProfilePopupOpen(true);
   }
   const handleAddPlaceClick = () => {
-    document.querySelector('.popup_type_add-card').classList.add('popup_active');
+    setIsAddPlacePopupOpen(true);
   }
 
   return (
@@ -33,6 +37,7 @@ function App() {
         name = "edit-profile"
         title = "Редактировать профиль"
         textButton = "Сохранить"
+        isOpen = {isEditProfilePopupOpen}
       >
         <>
           <label className="popup__input-element">
@@ -75,6 +80,7 @@ function App() {
         name = "edit-avatar"
         title = "Обновить аватар"
         textButton = "Сохранить"
+        isOpen = {isEditAvatarPopupOpen}
       >
         <>
           <label className="popup__input-element">
@@ -96,6 +102,7 @@ function App() {
         name = "add-card"
         title = "Новое место"
         textButton = "Создать"
+        isOpen = {isAddPlacePopupOpen}
       >
         <label className="popup__input-element">
           <input
