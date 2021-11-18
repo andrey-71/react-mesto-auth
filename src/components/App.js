@@ -22,9 +22,9 @@ function App() {
 
       <Header />
       <Main
-        onEditAvatar ={handleEditAvatarClick}
-        onEditProfile ={handleEditProfileClick}
-        onEditAvatar ={handleAddPlaceClick}
+        onEditAvatar = {handleEditAvatarClick}
+        onEditProfile = {handleEditProfileClick}
+        onAddPlace = {handleAddPlaceClick}
       />
       <Footer />
 
