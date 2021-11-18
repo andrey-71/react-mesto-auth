@@ -154,11 +154,11 @@ function App() {
         textButton = "Да"
       ></PopupWithForm>
 
+      {/* Popup view card */}
       <ImagePopup
         card = {selectedCard}
         onClose = {closeAllPopups}
       />
-
 
     </div>
   );
