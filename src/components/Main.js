@@ -1,19 +1,24 @@
 import React from 'react';
 import api from '../utils/api';
+import Card from './Сard';
 
 function Main(props) {
 
   const [userInfo, setUserInfo] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   // Загрузка данных с сервера
-  api.getAppInfo()
-    .then(([getUserInfo, getInitialCards]) => {
-      setUserInfo(getUserInfo);
-      // userInfo.setUserAvatar(getUserInfo);
+  React.useEffect(() => {
+    api.getAppInfo()
+      .then(([getUserInfo, getInitialCards]) => {
+        setUserInfo(getUserInfo);
+        setCards(getInitialCards);
+        // userInfo.setUserAvatar(getUserInfo);
 
-      // cardList.renderItems(getInitialCards);
-    })
-    .catch(err => console.log(`При загрузке данных с сервера произошла ошибка: ${err}`));
+        // cardList.renderItems(getInitialCards);
+      })
+      .catch(err => console.log(`При загрузке данных с сервера произошла ошибка: ${err}`));
+  }, [])
 
   return (
     <main className="content container__content">
@@ -36,7 +41,21 @@ function Main(props) {
         <button className="profile__add-button" type="button" onClick ={props.onAddPlace}></button>
       </section>
       {/* Photo gallery */}
-      <section className="card-gallery content__card-gallery"></section>
+      <section className="card-gallery content__card-gallery">
+          {cards.map((card) => (
+            <figure className="card">
+              <img src={card.link} alt={card.name} className="card__image"/>
+              <button className="card__delete" type="button"></button>
+              <figcaption className="card__info">
+                <h2 className="card__caption">{card.name}</h2>
+                <div className="card__like-section">
+                  <button className="card__like" type="button"></button>
+                  <p className="card__like-number">{card.likes.length}</p>
+                </div>
+              </figcaption>
+            </figure>
+          ))}
+      </section>
     </main>
   )
 }
