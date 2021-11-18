@@ -7,10 +7,12 @@ import ImagePopup from './ImagePopup';
 
 
 function App() {
+  // Начальные состояния для закрытых попапов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  let [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  let [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
+  // Функции изменения состояния попапов для открытия
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
   }
@@ -19,6 +21,12 @@ function App() {
   }
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
+  }
+  // Функция изменения состояния попапов для закрытия
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
   }
 
   return (
@@ -38,6 +46,7 @@ function App() {
         title = "Редактировать профиль"
         textButton = "Сохранить"
         isOpen = {isEditProfilePopupOpen}
+        onClose = {closeAllPopups}
       >
         <>
           <label className="popup__input-element">
@@ -81,6 +90,7 @@ function App() {
         title = "Обновить аватар"
         textButton = "Сохранить"
         isOpen = {isEditAvatarPopupOpen}
+        onClose = {closeAllPopups}
       >
         <>
           <label className="popup__input-element">
@@ -103,6 +113,7 @@ function App() {
         title = "Новое место"
         textButton = "Создать"
         isOpen = {isAddPlacePopupOpen}
+        onClose = {closeAllPopups}
       >
         <label className="popup__input-element">
           <input
