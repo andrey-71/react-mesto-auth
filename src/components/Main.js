@@ -1,6 +1,6 @@
 import React from 'react';
 import api from '../utils/api';
-import Card from './Сard';
+import Card from './Card';
 
 function Main(props) {
 
@@ -42,18 +42,13 @@ function Main(props) {
       </section>
       {/* Photo gallery */}
       <section className="card-gallery content__card-gallery">
-          {cards.map((card) => (
-            <figure className="card">
-              <img src={card.link} alt={card.name} className="card__image"/>
-              <button className="card__delete" type="button"></button>
-              <figcaption className="card__info">
-                <h2 className="card__caption">{card.name}</h2>
-                <div className="card__like-section">
-                  <button className="card__like" type="button"></button>
-                  <p className="card__like-number">{card.likes.length}</p>
-                </div>
-              </figcaption>
-            </figure>
+          {cards.map((card, key) => (
+            <Card
+              name = {card.name}
+              link = {card.link}
+              likes = {card.likes.length}
+              key = {key}
+            />
           ))}
       </section>
     </main>
