@@ -13,22 +13,6 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState( null);
 
-  // Закрытие попапа при нажатии Esc
-  React.useEffect(() => {
-    if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
-      function handleEsc(evt) {
-        if (evt.key === 'Escape') {
-          console.log(evt);
-          closeAllPopups();
-        }
-      }
-      document.addEventListener('keyup', handleEsc);
-
-      return () => {
-        document.removeEventListener('keyup', handleEsc);
-      }
-    }
-  }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, selectedCard]);
 
   // Функции изменения состояния попапов для открытия
   const handleEditAvatarClick = () => {
@@ -51,6 +35,30 @@ function App() {
     setSelectedCard(null);
   }
 
+  // Закрытие попапа при нажатии Esc
+  React.useEffect(() => {
+    if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
+      const handleEscClick = (evt) => {
+        if (evt.key === 'Escape') {
+          console.log(evt);
+          closeAllPopups();
+        }
+      }
+      document.addEventListener('keyup', handleEscClick);
+
+      return () => {
+        document.removeEventListener('keyup', handleEscClick);
+      }
+    }
+  }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, selectedCard]);
+
+  // Закрытие попапа при клике на overlay
+  const handleOverlayClick = (evt) => {
+    if (evt.target.classList.contains('popup')) {
+      closeAllPopups();
+    }
+  }
+
   return (
     <div className="container">
 
@@ -69,6 +77,7 @@ function App() {
         title = "Редактировать профиль"
         textButton = "Сохранить"
         isOpen = {isEditProfilePopupOpen}
+        onPopupClick = {handleOverlayClick}
         onClose = {closeAllPopups}
       >
         <>
@@ -113,6 +122,7 @@ function App() {
         title = "Обновить аватар"
         textButton = "Сохранить"
         isOpen = {isEditAvatarPopupOpen}
+        onPopupClick = {handleOverlayClick}
         onClose = {closeAllPopups}
       >
         <>
@@ -136,6 +146,7 @@ function App() {
         title = "Новое место"
         textButton = "Создать"
         isOpen = {isAddPlacePopupOpen}
+        onPopupClick = {handleOverlayClick}
         onClose = {closeAllPopups}
       >
         <label className="popup__input-element">
@@ -169,11 +180,13 @@ function App() {
         name = "delete-card"
         title = "Вы уверены?"
         textButton = "Да"
+        onPopupClick = {handleOverlayClick}
       ></PopupWithForm>
 
       {/* Popup view card */}
       <ImagePopup
         card = {selectedCard}
+        onPopupClick = {handleOverlayClick}
         onClose = {closeAllPopups}
       />
 
