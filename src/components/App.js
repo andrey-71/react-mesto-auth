@@ -13,6 +13,23 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState( null);
 
+  // Закрытие попапа при нажатии Esc
+  React.useEffect(() => {
+    if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
+      function handleEsc(evt) {
+        if (evt.key === 'Escape') {
+          console.log(evt);
+          closeAllPopups();
+        }
+      }
+      document.addEventListener('keyup', handleEsc);
+
+      return () => {
+        document.removeEventListener('keyup', handleEsc);
+      }
+    }
+  }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, selectedCard]);
+
   // Функции изменения состояния попапов для открытия
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
