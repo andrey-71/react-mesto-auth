@@ -4,9 +4,21 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import api from '../utils/api';
 
 
 function App() {
+  // Переменная состояния пользователя
+  const [currentUser, setCurrentUser] = React.useState(null);
+  // Данные пользователя
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch(err => console.log(`При загрузке данных пользователя произошла ошибка: ${err}`));
+  }, []);
+  console.log(currentUser);
   // Начальные состояния для закрытых попапов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -40,7 +52,6 @@ function App() {
     if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
       const handleEscClick = (evt) => {
         if (evt.key === 'Escape') {
-          console.log(evt);
           closeAllPopups();
         }
       }
