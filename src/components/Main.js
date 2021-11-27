@@ -1,21 +1,21 @@
 import React from 'react';
 import api from '../utils/api';
 import Card from './Card';
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Main(props) {
 
-  const [userInfo, setUserInfo] = React.useState({});
+  const currentUser = React.useContext(CurrentUserContext);
   const [cards, setCards] = React.useState([]);
 
-  // Загрузка данных с сервера
+  // Загрузка карточек с сервера
   React.useEffect(() => {
-    api.getAppInfo()
-      .then(([getUserInfo, getInitialCards]) => {
-        setUserInfo(getUserInfo);
-        setCards(getInitialCards);
+    api.getInitialCards()
+      .then((res) => {
+        setCards(res);
       })
-      .catch(err => console.log(`При загрузке данных с сервера произошла ошибка: ${err}`));
-  }, [])
+      .catch(err => console.log(`При загрузке карточек произошла ошибка: ${err}`));
+  }, []);
 
   return (
     <main className="content container__content">
@@ -24,14 +24,14 @@ function Main(props) {
         <div className="profile__user-data">
           <button className="profile__edit-avatar" type="button" onClick ={props.onEditAvatar}>
             <img
-              src={userInfo.avatar}
+              src={currentUser.avatar}
               alt="Фотография пользователя"
               className="profile__avatar"
             />
           </button>
           <div className="profile__info">
-            <h1 className="profile__name">{userInfo.name}</h1>
-            <p className="profile__job">{userInfo.about}</p>
+            <h1 className="profile__name">{currentUser.name}</h1>
+            <p className="profile__job">{currentUser.about}</p>
             <button className="profile__edit-button" type="button" onClick ={props.onEditProfile}></button>
           </div>
         </div>

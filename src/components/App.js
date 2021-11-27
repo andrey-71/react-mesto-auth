@@ -10,7 +10,7 @@ import api from '../utils/api';
 
 function App() {
   // Переменная состояния пользователя
-  const [currentUser, setCurrentUser] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState(false);
   // Данные пользователя
   React.useEffect(() => {
     api.getUserInfo()
@@ -19,6 +19,7 @@ function App() {
       })
       .catch(err => console.log(`При загрузке данных пользователя произошла ошибка: ${err}`));
   }, []);
+
   // Начальные состояния для закрытых попапов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
