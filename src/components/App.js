@@ -9,9 +9,16 @@ import api from '../utils/api';
 
 
 function App() {
-  // Переменная состояния пользователя
+  //Стейт-переменные:
+  // - данных пользователя
   const [currentUser, setCurrentUser] = React.useState(false);
-  // Данные пользователя
+  // - попапов
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState( null);
+
+  // Получение данных пользователя в стейт
   React.useEffect(() => {
     api.getUserInfo()
       .then((res) => {
@@ -19,12 +26,6 @@ function App() {
       })
       .catch(err => console.log(`При загрузке данных пользователя произошла ошибка: ${err}`));
   }, []);
-
-  // Начальные состояния для закрытых попапов
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState( null);
 
 
   // Функции изменения состояния попапов для открытия

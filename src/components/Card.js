@@ -1,6 +1,9 @@
 import React from 'react';
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Card(props) {
+  // Подписка на контекст данных пользователя
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <figure className="card">
@@ -14,7 +17,7 @@ function Card(props) {
           }
         }
       />
-      <button className="card__delete" type="button"></button>
+      <button className='card__delete-button' type="button"></button>
       <figcaption className="card__info">
         <h2 className="card__caption">{props.name}</h2>
         <div className="card__like-section">

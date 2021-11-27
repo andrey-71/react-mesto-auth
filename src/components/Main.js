@@ -4,8 +4,9 @@ import Card from './Card';
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Main(props) {
-
+  // Подписка на контекст данных пользователя
   const currentUser = React.useContext(CurrentUserContext);
+  // Стейт-переменная карточки
   const [cards, setCards] = React.useState([]);
 
   // Загрузка карточек с сервера
