@@ -5,6 +5,12 @@ function Card(props) {
   // Подписка на контекст данных пользователя
   const currentUser = React.useContext(CurrentUserContext);
 
+  // Отрисовка кнопки удаления карточки, если карточка создана пользователем
+  const isOwn = props.card.owner._id === currentUser._id;
+  const cardDeleteButtonClassName = (
+    `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
+  );
+
   return (
     <figure className="card">
       <img
@@ -17,7 +23,7 @@ function Card(props) {
           }
         }
       />
-      <button className='card__delete-button' type="button"></button>
+      <button className={cardDeleteButtonClassName} type="button"></button>
       <figcaption className="card__info">
         <h2 className="card__caption">{props.name}</h2>
         <div className="card__like-section">
