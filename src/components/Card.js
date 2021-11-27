@@ -10,6 +10,9 @@ function Card(props) {
   const cardDeleteButtonClassName = (
     `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
   );
+  // Отрисовка лайка на карточке, поставленного пользователем
+  const isLiked = props.card.likes.some(like => like._id === currentUser._id);
+  const cardLikeButtonClassName = `card__like${isLiked ? ' card__like_active' : ''}`;
 
   return (
     <figure className="card">
@@ -27,7 +30,7 @@ function Card(props) {
       <figcaption className="card__info">
         <h2 className="card__caption">{props.name}</h2>
         <div className="card__like-section">
-          <button className="card__like" type="button"></button>
+          <button className={cardLikeButtonClassName} type="button"></button>
           <p className="card__like-number">{props.likes}</p>
         </div>
       </figcaption>
