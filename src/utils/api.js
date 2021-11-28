@@ -73,23 +73,40 @@ class Api {
       .then(res => this._handleResult(res));
   }
 
-  // Установка лайка
-  addLikeCard(data) {
-    return fetch(`${this._serverUrl}cards/likes/${data._id}`, {
-      method: 'PUT',
-      headers: this._sendRequestHeaders,
-    })
-      .then(res => this._handleResult(res));
+  // Установка/снятие лайка
+  changeLikeCardStatus(card, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._serverUrl}cards/likes/${card._id}`, {
+        method: 'PUT',
+        headers: this._sendRequestHeaders
+      })
+        .then(res => this._handleResult(res));
+    } else {
+      return fetch(`${this._serverUrl}cards/likes/${card._id}`, {
+        method: 'DELETE',
+        headers: this._receiveRequestHeaders
+      })
+        .then(res => this._handleResult(res));
+    }
   }
 
+  // Установка лайка
+  // addLikeCard(data) {
+  //   return fetch(`${this._serverUrl}cards/likes/${data._id}`, {
+  //     method: 'PUT',
+  //     headers: this._sendRequestHeaders,
+  //   })
+  //     .then(res => this._handleResult(res));
+  // }
+
   // Снятие лайка
-  removeLikeCard(data) {
-    return fetch(`${this._serverUrl}cards/likes/${data._id}`, {
-      method: 'DELETE',
-      headers: this._receiveRequestHeaders
-    })
-      .then(res => this._handleResult(res));
-  }
+  // removeLikeCard(data) {
+  //   return fetch(`${this._serverUrl}cards/likes/${data._id}`, {
+  //     method: 'DELETE',
+  //     headers: this._receiveRequestHeaders
+  //   })
+  //     .then(res => this._handleResult(res));
+  // }
 
   // Обработчик результата запроса
   _handleResult(res) {

@@ -12,19 +12,30 @@ function App() {
   //Стейт-переменные:
   // - данных пользователя
   const [currentUser, setCurrentUser] = React.useState(false);
+  // - карточек
+  const [cards, setCards] = React.useState([]);
   // - попапов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState( null);
 
-  // Получение данных пользователя в стейт
+  // Получение данных пользователя и запись в стейт
   React.useEffect(() => {
     api.getUserInfo()
       .then((res) => {
         setCurrentUser(res);
       })
       .catch(err => console.log(`При загрузке данных пользователя произошла ошибка: ${err}`));
+  }, []);
+
+  // Получение данных карточек и запись в стейт
+  React.useEffect(() => {
+    api.getInitialCards()
+      .then((res) => {
+        setCards(res);
+      })
+      .catch(err => console.log(`При загрузке карточек произошла ошибка: ${err}`));
   }, []);
 
 
@@ -82,6 +93,7 @@ function App() {
           onEditProfile = {handleEditProfileClick}
           onAddPlace = {handleAddPlaceClick}
           onCardClick = {handleCardClick}
+          cards = {cards}
         />
         <Footer />
 

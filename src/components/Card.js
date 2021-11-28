@@ -30,7 +30,15 @@ function Card(props) {
       <figcaption className="card__info">
         <h2 className="card__caption">{props.name}</h2>
         <div className="card__like-section">
-          <button className={cardLikeButtonClassName} type="button"></button>
+          <button
+            className={cardLikeButtonClassName}
+            type="button"
+            onClick={
+              function handleLikeClick() {
+                props.onCardLike(props.card)
+              }
+            }
+          ></button>
           <p className="card__like-number">{props.likes}</p>
         </div>
       </figcaption>
