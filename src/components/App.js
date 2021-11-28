@@ -83,6 +83,17 @@ function App() {
     }
   }
 
+  // Лайк на карточке
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(c => c._id === currentUser._id);
+
+    api.changeLikeCardStatus(card, !isLiked)
+      .then((newCard) => {
+        setCards((cards) => cards.map((item) => item._id === card._id ? newCard : item));
+      })
+      .catch(err => console.log(`При постановке/снятии лайк произошла ошибка: ${err}`));
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="container">
@@ -93,6 +104,7 @@ function App() {
           onEditProfile = {handleEditProfileClick}
           onAddPlace = {handleAddPlaceClick}
           onCardClick = {handleCardClick}
+          onCardLikeClick = {handleCardLike}
           cards = {cards}
         />
         <Footer />

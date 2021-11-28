@@ -8,18 +8,6 @@ function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
 
-  // Лайк на карточке
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(c => c._id === currentUser._id);
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card, !isLiked)
-      .then((newCard) => {
-        props.cards.map((c) => c._id === card ? newCard : c);
-      })
-      .catch(err => console.log(`При лайке карточки произошла ошибка: ${err}`));
-  }
-
   return (
     <main className="content container__content">
       {/* Profile */}
@@ -49,7 +37,7 @@ function Main(props) {
               link = {card.link}
               likes = {card.likes.length}
               onCardClick = {props.onCardClick}
-              onCardLike = {handleCardLike}
+              onCardLike = {props.onCardLikeClick}
               key = {key}
             />
           ))}
