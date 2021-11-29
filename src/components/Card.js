@@ -26,14 +26,22 @@ function Card(props) {
           }
         }
       />
-      <button className={cardDeleteButtonClassName} type="button"></button>
+      <button
+        className={cardDeleteButtonClassName}
+        type="button"
+        onClick = {
+          function handleDeleteClick() {
+            props.onCardDelete(props.card)
+          }
+        }
+      ></button>
       <figcaption className="card__info">
         <h2 className="card__caption">{props.name}</h2>
         <div className="card__like-section">
           <button
             className={cardLikeButtonClassName}
             type="button"
-            onClick={
+            onClick = {
               function handleLikeClick() {
                 props.onCardLike(props.card)
               }

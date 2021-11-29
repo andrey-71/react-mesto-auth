@@ -20,7 +20,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState( null);
 
-  // Получение данных пользователя и запись в стейт
+  // Получение данных пользователя и отрисовка на странице
   React.useEffect(() => {
     api.getUserInfo()
       .then((res) => {
@@ -29,7 +29,7 @@ function App() {
       .catch(err => console.log(`При загрузке данных пользователя произошла ошибка: ${err}`));
   }, []);
 
-  // Получение данных карточек и запись в стейт
+  // Получение данных карточек и отрисовка  на странице
   React.useEffect(() => {
     api.getInitialCards()
       .then((res) => {
@@ -94,6 +94,16 @@ function App() {
       .catch(err => console.log(`При постановке/снятии лайк произошла ошибка: ${err}`));
   }
 
+  // Удаление карточки
+  function handleCardDelete(card) {
+    api.deleteCard(card)
+      .then(() => {
+        setCards((cards) => cards.filter((item) => item._id !== card._id));
+      })
+      .catch(err => console.log(`При удалении карточки произошла ошибка: ${err}`));
+  }
+
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="container">
@@ -105,6 +115,7 @@ function App() {
           onAddPlace = {handleAddPlaceClick}
           onCardClick = {handleCardClick}
           onCardLikeClick = {handleCardLike}
+          onCardDelete = {handleCardDelete}
           cards = {cards}
         />
         <Footer />

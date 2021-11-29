@@ -38,6 +38,7 @@ function Main(props) {
               likes = {card.likes.length}
               onCardClick = {props.onCardClick}
               onCardLike = {props.onCardLikeClick}
+              onCardDelete = {props.onCardDelete}
               key = {key}
             />
           ))}
