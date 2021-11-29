@@ -4,6 +4,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from "./EditProfilePopup";
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 
@@ -121,49 +122,11 @@ function App() {
         <Footer />
 
         {/* Popup edit user info */}
-        <PopupWithForm
-          name = "edit-profile"
-          title = "Редактировать профиль"
-          textButton = "Сохранить"
+        <EditProfilePopup
           isOpen = {isEditProfilePopupOpen}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-        >
-          <>
-            <label className="popup__input-element">
-              <input
-                type="text"
-                placeholder="Ваше имя"
-                className="popup__input popup__input_type_profile-name"
-                id="input-profile-name"
-                name="nameUser"
-                required
-                min={2}
-                max={40}
-              />
-              <span
-                className="popup__input-error"
-                id="input-profile-name-error"
-              ></span>
-            </label>
-            <label className="popup__input-element">
-              <input
-                type="text"
-                placeholder="Чем занимаетесь"
-                className="popup__input popup__input_type_profile-job"
-                id="input-profile-job"
-                name="infoUser"
-                required
-                min={2}
-                max={200}
-              />
-              <span
-                className="popup__input-error"
-                id="input-profile-job-error"
-              ></span>
-            </label>
-          </>
-        </PopupWithForm>
+        />
 
         {/* Popup edit user avatar */}
         <PopupWithForm
