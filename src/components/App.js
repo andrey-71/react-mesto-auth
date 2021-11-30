@@ -6,6 +6,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 
@@ -138,7 +139,7 @@ function App() {
           onEditProfile = {handleEditProfileClick}
           onAddPlace = {handleAddPlaceClick}
           onCardClick = {handleCardClick}
-          onCardLikeClick = {handleCardLike}
+          onCardLike = {handleCardLike}
           onCardDelete = {handleCardDelete}
           cards = {cards}
         />
@@ -162,39 +163,12 @@ function App() {
 
 
         {/* Popup add cards */}
-        <PopupWithForm
-          name = "add-card"
-          title = "Новое место"
-          textButton = "Создать"
+        <AddPlacePopup
           isOpen = {isAddPlacePopupOpen}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-        >
-          <label className="popup__input-element">
-            <input
-              type="text"
-              placeholder="Название"
-              className="popup__input popup__input_type_card-name"
-              id="input-card-name"
-              name="name"
-              required
-              min={2}
-              max={30}
-            />
-            <span className="popup__input-error" id="input-card-name-error"></span>
-          </label>
-          <label className="popup__input-element">
-            <input
-              type="url"
-              placeholder="Ссылка на картинку"
-              className="popup__input popup__input_type_card-link"
-              id="input-card-link"
-              name="link"
-              required
-            />
-            <span className="popup__input-error" id="input-card-link-error"></span>
-          </label>
-        </PopupWithForm>
+        />
+
 
         {/* Popup delete card */}
         <PopupWithForm

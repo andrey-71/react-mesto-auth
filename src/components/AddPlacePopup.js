@@ -1,0 +1,45 @@
+import React from 'react';
+import PopupWithForm from "./PopupWithForm";
+
+function AddPlacePopup(props) {
+
+
+
+  return (
+    <PopupWithForm
+      name = "add-card"
+      title = "Новое место"
+      textButton = "Создать"
+      isOpen = {props.isOpen}
+      onPopupClick = {props.onPopupClick}
+      onClose = {props.onClose}
+    >
+      <label className="popup__input-element">
+        <input
+          type="text"
+          placeholder="Название"
+          className="popup__input popup__input_type_card-name"
+          id="input-card-name"
+          name="name"
+          required
+          min={2}
+          max={30}
+        />
+        <span className="popup__input-error" id="input-card-name-error"></span>
+      </label>
+      <label className="popup__input-element">
+        <input
+          type="url"
+          placeholder="Ссылка на картинку"
+          className="popup__input popup__input_type_card-link"
+          id="input-card-link"
+          name="link"
+          required
+        />
+        <span className="popup__input-error" id="input-card-link-error"></span>
+      </label>
+    </PopupWithForm>
+  )
+}
+
+export default AddPlacePopup;
