@@ -27,20 +27,20 @@ class Api {
   }
 
   // Отправка данных пользователя
-  patchUserInfo(data) {
+  setUserInfo(data) {
     return fetch(`${this._serverUrl}users/me`, {
       method: 'PATCH',
       headers: this._sendRequestHeaders,
       body: JSON.stringify({
-        name: data.nameUser,
-        about: data.infoUser
+        name: data.name,
+        about: data.about
       })
     })
       .then(res => this._handleResult(res));
   }
 
   // Отправка аватара пользователя
-  patchAvatarUserInfo(data) {
+  setAvatarUserInfo(data) {
     return fetch(`${this._serverUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._sendRequestHeaders,
@@ -52,7 +52,7 @@ class Api {
   }
 
   // Отправка новой карточки
-  patchNewCard(data) {
+  setNewCard(data) {
     return fetch(`${this._serverUrl}cards`, {
       method: 'POST',
       headers: this._sendRequestHeaders,

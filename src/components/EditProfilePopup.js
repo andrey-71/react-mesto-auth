@@ -28,12 +28,22 @@ function EditProfilePopup(props) {
     setDescription(evt.target.value);
   }
 
+  // Обработчик формы
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.onUpdateUser({
+      name,
+      about: description
+    });
+  }
+
   return (
     <PopupWithForm
       name = "edit-profile"
       title = "Редактировать профиль"
       textButton = "Сохранить"
       isOpen = {props.isOpen}
+      onSubmit = {handleSubmit}
       onPopupClick = {props.onPopupClick}
       onClose = {props.onClose}
     >

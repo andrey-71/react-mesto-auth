@@ -61,6 +61,18 @@ function App() {
     setSelectedCard(null);
   }
 
+  // Отправка на сервер
+  // - данных редактирования пользователя
+  function handleUpdateUser(userData) {
+    api.setUserInfo(userData)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch(err => console.log(`При отправке данных пользователя произошла ошибка: ${err}`));
+  }
+
+
   // Закрытие попапа при нажатии Esc
   React.useEffect(() => {
     if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
@@ -124,6 +136,7 @@ function App() {
         {/* Popup edit user info */}
         <EditProfilePopup
           isOpen = {isEditProfilePopupOpen}
+          onUpdateUser = {handleUpdateUser}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
         />
