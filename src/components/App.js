@@ -9,6 +9,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
+import DeleteCardPopup from "./DeleteCardPopup";
 
 
 
@@ -116,8 +117,6 @@ function App() {
   }
 
 
-
-
   // Лайк на карточке
   function handleCardLike(card) {
     const isLiked = card.likes.some(c => c._id === currentUser._id);
@@ -182,14 +181,14 @@ function App() {
 
 
         {/* Popup delete card */}
-        <PopupWithForm
+        <DeleteCardPopup
           isOpen = {isDeleteCardPopupOpen}
           name = "delete-card"
           title = "Вы уверены?"
           textButton = "Да"
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-        ></PopupWithForm>
+        />
 
         {/* Popup view card */}
         <ImagePopup
