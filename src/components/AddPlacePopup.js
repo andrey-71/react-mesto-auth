@@ -38,7 +38,7 @@ function AddPlacePopup(props) {
           min={2}
           max={30}
         />
-        <span className="popup__input-error" id="input-card-name-error"></span>
+        <span className="popup__input-error" id="input-card-name-error"/>
       </label>
       <label className="popup__input-element">
         <input
@@ -50,7 +50,7 @@ function AddPlacePopup(props) {
           ref={newCardLink}
           required
         />
-        <span className="popup__input-error" id="input-card-link-error"></span>
+        <span className="popup__input-error" id="input-card-link-error"/>
       </label>
     </PopupWithForm>
   )

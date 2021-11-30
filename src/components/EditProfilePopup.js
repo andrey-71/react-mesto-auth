@@ -64,7 +64,7 @@ function EditProfilePopup(props) {
           <span
             className="popup__input-error"
             id="input-profile-name-error"
-          ></span>
+          />
         </label>
         <label className="popup__input-element">
           <input
@@ -82,7 +82,7 @@ function EditProfilePopup(props) {
           <span
             className="popup__input-error"
             id="input-profile-job-error"
-          ></span>
+          />
         </label>
       </>
     </PopupWithForm>

@@ -47,8 +47,8 @@ function App() {
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
   }
-  const handleCardDeleteClick = () => {
-    setIsDeleteCardPopupOpen(true);
+  const handleCardDeleteClick = (card) => {
+    setIsDeleteCardPopupOpen(card);
   }
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -114,6 +114,15 @@ function App() {
         }
     })
       .catch(err => console.log(`При отправке данных новой карточки произошла ошибка: ${err}`));
+  }
+  // - запроса на удаление карточки
+  function handleDeleteCardSubmit(card) {
+    api.deleteCard(card)
+      .then(() => {
+        setCards((cards) => cards.filter((item) => item._id !== card._id));
+        closeAllPopups();
+      })
+      .catch(err => console.log(`При удалении карточки произошла ошибка: ${err}`));
   }
 
 
@@ -183,9 +192,7 @@ function App() {
         {/* Popup delete card */}
         <DeleteCardPopup
           isOpen = {isDeleteCardPopupOpen}
-          name = "delete-card"
-          title = "Вы уверены?"
-          textButton = "Да"
+          onDeleteCard = {handleDeleteCardSubmit}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
         />

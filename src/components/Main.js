@@ -23,10 +23,18 @@ function Main(props) {
           <div className="profile__info">
             <h1 className="profile__name">{currentUser.name}</h1>
             <p className="profile__job">{currentUser.about}</p>
-            <button className="profile__edit-button" type="button" onClick = {props.onEditProfile}></button>
+            <button
+              className="profile__edit-button"
+              type="button"
+              onClick = {props.onEditProfile}
+            />
           </div>
         </div>
-        <button className="profile__add-button" type="button" onClick ={props.onAddPlace}></button>
+        <button
+          className="profile__add-button"
+          type="button"
+          onClick ={props.onAddPlace}
+        />
       </section>
       {/* Photo gallery */}
       <section className="card-gallery content__card-gallery">
