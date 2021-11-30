@@ -24,26 +24,18 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState( null);
 
-  // Получение данных пользователя и отрисовка на странице
+  // Получение карточек и данных пользователя, отрисовка на странице
   React.useEffect(() => {
-    api.getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
+    api.getAppInfo()
+      .then(([getUserInfo, getInitialCards]) => {
+        setCurrentUser(getUserInfo);
+        setCards(getInitialCards);
       })
-      .catch(err => console.log(`При загрузке данных пользователя произошла ошибка: ${err}`));
-  }, []);
-
-  // Получение данных карточек и отрисовка  на странице
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch(err => console.log(`При загрузке карточек произошла ошибка: ${err}`));
-  }, []);
+      .catch(err => console.log(`При загрузке данных с сервера произошла ошибка: ${err}`));
+  }, [])
 
 
-  // Функции изменения состояния попапов для открытия
+  // Открытие попапов
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
   }
@@ -56,13 +48,36 @@ function App() {
   const handleCardClick = (card) => {
     setSelectedCard(card);
   }
-  // Функция изменения состояния попапов для закрытия
+
+  // Закрытие попапов
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
   }
+  // Закрытие попапа при нажатии Esc
+  React.useEffect(() => {
+    if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
+      const handleEscClick = (evt) => {
+        if (evt.key === 'Escape') {
+          closeAllPopups();
+        }
+      }
+      document.addEventListener('keyup', handleEscClick);
+
+      return () => {
+        document.removeEventListener('keyup', handleEscClick);
+      }
+    }
+  }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, selectedCard]);
+  // Закрытие попапа при клике на overlay
+  const handleOverlayClick = (evt) => {
+    if (evt.target.classList.contains('popup')) {
+      closeAllPopups();
+    }
+  }
+
 
   // Отправка на сервер
   // - данных пользователя
@@ -96,28 +111,7 @@ function App() {
   }
 
 
-  // Закрытие попапа при нажатии Esc
-  React.useEffect(() => {
-    if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
-      const handleEscClick = (evt) => {
-        if (evt.key === 'Escape') {
-          closeAllPopups();
-        }
-      }
-      document.addEventListener('keyup', handleEscClick);
 
-      return () => {
-        document.removeEventListener('keyup', handleEscClick);
-      }
-    }
-  }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, selectedCard]);
-
-  // Закрытие попапа при клике на overlay
-  const handleOverlayClick = (evt) => {
-    if (evt.target.classList.contains('popup')) {
-      closeAllPopups();
-    }
-  }
 
   // Лайк на карточке
   function handleCardLike(card) {
