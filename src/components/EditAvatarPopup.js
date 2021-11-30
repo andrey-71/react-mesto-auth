@@ -13,6 +13,13 @@ function EditAvatarPopup(props) {
     });
   }
 
+  // Очистка поля ввода при закрытии попапа
+  React.useEffect(() => {
+    if (!props.isOpen) {
+      avatarLink.current.value = '';
+    }
+  }, [props.isOpen]);
+
   return (
     <PopupWithForm
       name = "edit-avatar"

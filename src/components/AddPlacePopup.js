@@ -2,7 +2,7 @@ import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
-  // Реф имени и ссылки новой карточки
+  // Поля ввода
   const newCardName = React.useRef('');
   const newCardLink = React.useRef('');
 
@@ -15,9 +15,12 @@ function AddPlacePopup(props) {
     });
   }
 
+  // Очистка полей ввода при закрытии попапа
   React.useEffect(() => {
-    newCardName.current.value = '';
-    newCardLink.current.value = '';
+    if (!props.isOpen) {
+      newCardName.current.value = '';
+      newCardLink.current.value = '';
+    }
   }, [props.isOpen]);
 
 
