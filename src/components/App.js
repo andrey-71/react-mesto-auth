@@ -10,9 +10,9 @@ import api from '../utils/api';
 
 
 function App() {
-  //Стейт-переменные:
+  // Стейт-переменные:
   // - данных пользователя
-  const [currentUser, setCurrentUser] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
   // - карточек
   const [cards, setCards] = React.useState([]);
   // - попапов

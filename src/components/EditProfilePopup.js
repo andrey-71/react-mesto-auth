@@ -6,6 +6,28 @@ function EditProfilePopup(props) {
   // Подписка на контекст данных пользователя
   const currentUser = React.useContext(CurrentUserContext);
 
+  // Стейт-переменные:
+  // - инпут с именем пользователя
+  const [name, setName] = React.useState('');
+  // - инпут с информацией о пользователе
+  const [description, setDescription] = React.useState('');
+
+  // Запись данных пользователя при загрузке и открытии попапа в управляемые компоненты (инпуты формы)
+  React.useEffect(() => {
+    if (props.isOpen) {
+      setName(currentUser.name);
+      setDescription(currentUser.about);
+    }
+  }, [props.isOpen, currentUser]);
+
+  // Обработчики изменения инпутов
+  function handleChangeName(evt) {
+    setName(evt.target.value);
+  }
+  function handleChangeDescription(evt) {
+    setDescription(evt.target.value);
+  }
+
   return (
     <PopupWithForm
       name = "edit-profile"
@@ -23,6 +45,8 @@ function EditProfilePopup(props) {
             className="popup__input popup__input_type_profile-name"
             id="input-profile-name"
             name="nameUser"
+            value={name}
+            onChange={handleChangeName}
             required
             min={2}
             max={40}
@@ -39,6 +63,8 @@ function EditProfilePopup(props) {
             className="popup__input popup__input_type_profile-job"
             id="input-profile-job"
             name="infoUser"
+            value={description}
+            onChange={handleChangeDescription}
             required
             min={2}
             max={200}
