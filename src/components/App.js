@@ -5,8 +5,10 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
+
 
 
 function App() {
@@ -142,28 +144,12 @@ function App() {
         />
 
         {/* Popup edit user avatar */}
-        <PopupWithForm
-          name = "edit-avatar"
-          title = "Обновить аватар"
-          textButton = "Сохранить"
+        <EditAvatarPopup
           isOpen = {isEditAvatarPopupOpen}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-        >
-          <>
-            <label className="popup__input-element">
-              <input
-                type="url"
-                placeholder="Ссылка на картинку"
-                className="popup__input popup__input_type_avatar-link"
-                id="input-avatar-link"
-                name="avatarUser"
-                required
-              />
-              <span className="popup__input-error" id="input-avatar-link-error"></span>
-            </label>
-          </>
-        </PopupWithForm>
+        />
+
 
         {/* Popup add cards */}
         <PopupWithForm
