@@ -64,7 +64,7 @@ function App() {
   }
 
   // Отправка на сервер
-  // - данных редактирования пользователя
+  // - данных пользователя
   function handleUpdateUser(userData) {
     api.setUserInfo(userData)
       .then((res) => {
@@ -72,6 +72,15 @@ function App() {
         closeAllPopups();
       })
       .catch(err => console.log(`При отправке данных пользователя произошла ошибка: ${err}`));
+  }
+  // - аватара пользователя
+  function handleUpdateAvatar(userData) {
+    api.setUserAvatar(userData)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+        .catch(err => console.log(`При изменении аватара произошла ошибка: ${err}`));
   }
 
 
@@ -146,6 +155,7 @@ function App() {
         {/* Popup edit user avatar */}
         <EditAvatarPopup
           isOpen = {isEditAvatarPopupOpen}
+          onUpdateAvatar = {handleUpdateAvatar}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
         />

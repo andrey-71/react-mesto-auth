@@ -40,12 +40,12 @@ class Api {
   }
 
   // Отправка аватара пользователя
-  setAvatarUserInfo(data) {
+  setUserAvatar(data) {
     return fetch(`${this._serverUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._sendRequestHeaders,
       body: JSON.stringify({
-        avatar: data.avatarUser
+        avatar: data.avatar
       })
     })
       .then(res => this._handleResult(res));
