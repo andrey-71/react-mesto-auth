@@ -3,8 +3,8 @@ import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
   // Реф имени и ссылки новой карточки
-  const newCardName = React.useRef();
-  const newCardLink = React.useRef();
+  const newCardName = React.useRef('');
+  const newCardLink = React.useRef('');
 
   // Обработчик формы
   function handleSubmit(evt) {
@@ -14,6 +14,11 @@ function AddPlacePopup(props) {
       link: newCardLink.current.value
     });
   }
+
+  React.useEffect(() => {
+    newCardName.current.value = '';
+    newCardLink.current.value = '';
+  }, [props.isOpen]);
 
 
   return (

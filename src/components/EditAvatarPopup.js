@@ -3,7 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup(props) {
   // Реф ссылки на картинку
-  const avatarLink = React.useRef();
+  const avatarLink = React.useRef('');
 
   // Обработчик формы
   function handleSubmit(evt) {

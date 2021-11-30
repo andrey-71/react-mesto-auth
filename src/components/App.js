@@ -137,15 +137,6 @@ function App() {
       .catch(err => console.log(`При постановке/снятии лайк произошла ошибка: ${err}`));
   }
 
-  // Удаление карточки - переделать для сабмита
-  // function handleCardDelete(card) {
-  //   api.deleteCard(card)
-  //     .then(() => {
-  //       setCards((cards) => cards.filter((item) => item._id !== card._id));
-  //     })
-  //     .catch(err => console.log(`При удалении карточки произошла ошибка: ${err}`));
-  // }
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -179,7 +170,6 @@ function App() {
           onClose = {closeAllPopups}
         />
 
-
         {/* Popup add cards */}
         <AddPlacePopup
           isOpen = {isAddPlacePopupOpen}
@@ -187,7 +177,6 @@ function App() {
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
         />
-
 
         {/* Popup delete card */}
         <DeleteCardPopup
