@@ -83,6 +83,14 @@ function App() {
       })
         .catch(err => console.log(`При изменении аватара произошла ошибка: ${err}`));
   }
+  // - данных новой карточки
+  function handleAddPlaceSubmit(newCard) {
+    api.setNewCard(newCard)
+      .then((res) => {
+      closeAllPopups();
+    })
+      .catch(err => console.log(`При отправке данных новой карточки произошла ошибка: ${err}`));
+  }
 
 
   // Закрытие попапа при нажатии Esc
@@ -165,6 +173,7 @@ function App() {
         {/* Popup add cards */}
         <AddPlacePopup
           isOpen = {isAddPlacePopupOpen}
+          onAddPlace = {handleAddPlaceSubmit}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
         />
