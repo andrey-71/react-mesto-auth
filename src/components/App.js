@@ -22,6 +22,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState( null);
 
   // Получение карточек и данных пользователя, отрисовка на странице
@@ -45,6 +46,9 @@ function App() {
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
   }
+  const handleCardDeleteClick = () => {
+    setIsDeleteCardPopupOpen(true);
+  }
   const handleCardClick = (card) => {
     setSelectedCard(card);
   }
@@ -54,11 +58,12 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsDeleteCardPopupOpen(false);
     setSelectedCard(null);
   }
   // Закрытие попапа при нажатии Esc
   React.useEffect(() => {
-    if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
+    if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isDeleteCardPopupOpen || selectedCard) {
       const handleEscClick = (evt) => {
         if (evt.key === 'Escape') {
           closeAllPopups();
@@ -70,7 +75,7 @@ function App() {
         document.removeEventListener('keyup', handleEscClick);
       }
     }
-  }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, selectedCard]);
+  }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, isDeleteCardPopupOpen, selectedCard]);
   // Закрытие попапа при клике на overlay
   const handleOverlayClick = (evt) => {
     if (evt.target.classList.contains('popup')) {
@@ -124,14 +129,14 @@ function App() {
       .catch(err => console.log(`При постановке/снятии лайк произошла ошибка: ${err}`));
   }
 
-  // Удаление карточки
-  function handleCardDelete(card) {
-    api.deleteCard(card)
-      .then(() => {
-        setCards((cards) => cards.filter((item) => item._id !== card._id));
-      })
-      .catch(err => console.log(`При удалении карточки произошла ошибка: ${err}`));
-  }
+  // Удаление карточки - переделать для сабмита
+  // function handleCardDelete(card) {
+  //   api.deleteCard(card)
+  //     .then(() => {
+  //       setCards((cards) => cards.filter((item) => item._id !== card._id));
+  //     })
+  //     .catch(err => console.log(`При удалении карточки произошла ошибка: ${err}`));
+  // }
 
 
   return (
@@ -145,7 +150,7 @@ function App() {
           onAddPlace = {handleAddPlaceClick}
           onCardClick = {handleCardClick}
           onCardLike = {handleCardLike}
-          onCardDelete = {handleCardDelete}
+          onCardDelete = {handleCardDeleteClick}
           cards = {cards}
         />
         <Footer />
@@ -178,10 +183,12 @@ function App() {
 
         {/* Popup delete card */}
         <PopupWithForm
+          isOpen = {isDeleteCardPopupOpen}
           name = "delete-card"
           title = "Вы уверены?"
           textButton = "Да"
           onPopupClick = {handleOverlayClick}
+          onClose = {closeAllPopups}
         ></PopupWithForm>
 
         {/* Popup view card */}
