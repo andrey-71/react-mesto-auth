@@ -87,7 +87,10 @@ function App() {
   function handleAddPlaceSubmit(newCard) {
     api.setNewCard(newCard)
       .then((res) => {
-      closeAllPopups();
+        if(cards) {
+          setCards([res, ...cards]);
+          closeAllPopups();
+        }
     })
       .catch(err => console.log(`При отправке данных новой карточки произошла ошибка: ${err}`));
   }
