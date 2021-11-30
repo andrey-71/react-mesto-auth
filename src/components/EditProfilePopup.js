@@ -12,11 +12,14 @@ function EditProfilePopup(props) {
   // - инпут с информацией о пользователе
   const [description, setDescription] = React.useState('');
 
-  // Запись данных пользователя при загрузке и открытии попапа в управляемые компоненты (инпуты формы)
+  // Запись данных пользователя при загрузке и открытии попапа в поля ввода формы
   React.useEffect(() => {
     if (props.isOpen) {
       setName(currentUser.name);
       setDescription(currentUser.about);
+    } else {
+      setName('');
+      setDescription('');
     }
   }, [props.isOpen, currentUser]);
 
