@@ -3,14 +3,12 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import DeleteCardPopup from "./DeleteCardPopup";
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
-import DeleteCardPopup from "./DeleteCardPopup";
-
 
 
 function App() {
@@ -25,6 +23,8 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState( null);
+  // - процесса загрузки данных на сервер
+  const [isLoading, setIsLoading] = React.useState(false);
 
   // Получение карточек и данных пользователя, отрисовка на странице
   React.useEffect(() => {
@@ -88,24 +88,29 @@ function App() {
   // Отправка на сервер
   // - данных пользователя
   function handleUpdateUser(userData) {
+    setIsLoading(true);
     api.setUserInfo(userData)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch(err => console.log(`При отправке данных пользователя произошла ошибка: ${err}`));
+      .catch(err => console.log(`При отправке данных пользователя произошла ошибка: ${err}`))
+      .finally(() => setIsLoading(false))
   }
   // - аватара пользователя
   function handleUpdateAvatar(userData) {
+    setIsLoading(true);
     api.setUserAvatar(userData)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
       })
-        .catch(err => console.log(`При изменении аватара произошла ошибка: ${err}`));
+      .catch(err => console.log(`При изменении аватара произошла ошибка: ${err}`))
+      .finally(() => setIsLoading(false))
   }
   // - данных новой карточки
   function handleAddPlaceSubmit(newCard) {
+    setIsLoading(true);
     api.setNewCard(newCard)
       .then((res) => {
         if(cards) {
@@ -113,16 +118,19 @@ function App() {
           closeAllPopups();
         }
     })
-      .catch(err => console.log(`При отправке данных новой карточки произошла ошибка: ${err}`));
+      .catch(err => console.log(`При отправке данных новой карточки произошла ошибка: ${err}`))
+      .finally(() => setIsLoading(false))
   }
   // - запроса на удаление карточки
   function handleDeleteCardSubmit(card) {
+    setIsLoading(true);
     api.deleteCard(card)
       .then(() => {
         setCards((cards) => cards.filter((item) => item._id !== card._id));
         closeAllPopups();
       })
-      .catch(err => console.log(`При удалении карточки произошла ошибка: ${err}`));
+      .catch(err => console.log(`При удалении карточки произошла ошибка: ${err}`))
+      .finally(() => setIsLoading(false))
   }
 
 
@@ -160,6 +168,7 @@ function App() {
           onUpdateUser = {handleUpdateUser}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
+          onLoading = {isLoading}
         />
 
         {/* Popup edit user avatar */}
@@ -168,6 +177,7 @@ function App() {
           onUpdateAvatar = {handleUpdateAvatar}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
+          onLoading = {isLoading}
         />
 
         {/* Popup add cards */}
@@ -176,6 +186,7 @@ function App() {
           onAddPlace = {handleAddPlaceSubmit}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
+          onLoading = {isLoading}
         />
 
         {/* Popup delete card */}
@@ -184,6 +195,7 @@ function App() {
           onDeleteCard = {handleDeleteCardSubmit}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
+          onLoading = {isLoading}
         />
 
         {/* Popup view card */}

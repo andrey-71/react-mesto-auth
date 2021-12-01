@@ -29,6 +29,7 @@ function EditAvatarPopup(props) {
       onSubmit = {handleSubmit}
       onPopupClick = {props.onPopupClick}
       onClose = {props.onClose}
+      onLoading = {props.onLoading}
     >
       <>
         <label className="popup__input-element">

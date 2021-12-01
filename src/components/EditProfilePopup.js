@@ -12,7 +12,7 @@ function EditProfilePopup(props) {
   // - инпут с информацией о пользователе
   const [description, setDescription] = React.useState('');
 
-  // Запись данных пользователя при загрузке и открытии попапа в поля ввода формы
+  // Запись и очистка данных пользователя в инпуты при открытии и закрытии попапа соответственно
   React.useEffect(() => {
     if (props.isOpen) {
       setName(currentUser.name);
@@ -49,6 +49,7 @@ function EditProfilePopup(props) {
       onSubmit = {handleSubmit}
       onPopupClick = {props.onPopupClick}
       onClose = {props.onClose}
+      onLoading = {props.onLoading}
     >
       <>
         <label className="popup__input-element">
