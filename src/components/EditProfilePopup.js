@@ -26,9 +26,11 @@ function EditProfilePopup(props) {
   // Обработчики изменения инпутов
   function handleChangeName(evt) {
     setName(evt.target.value);
+    console.log(evt.target.validity.valid);
   }
   function handleChangeDescription(evt) {
     setDescription(evt.target.value);
+    console.log(evt.target.validity.valid);
   }
 
   // Обработчик формы
@@ -62,8 +64,8 @@ function EditProfilePopup(props) {
             value={name}
             onChange={handleChangeName}
             required
-            min={2}
-            max={40}
+            minLength={2}
+            maxLength={40}
           />
           <span
             className="popup__input-error"
@@ -80,8 +82,8 @@ function EditProfilePopup(props) {
             value={description}
             onChange={handleChangeDescription}
             required
-            min={2}
-            max={200}
+            minLength={2}
+            maxLength={200}
           />
           <span
             className="popup__input-error"
