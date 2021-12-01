@@ -165,37 +165,37 @@ function App() {
         {/* Popup edit user info */}
         <EditProfilePopup
           isOpen = {isEditProfilePopupOpen}
+          isLoading = {isLoading}
           onUpdateUser = {handleUpdateUser}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-          onLoading = {isLoading}
         />
 
         {/* Popup edit user avatar */}
         <EditAvatarPopup
           isOpen = {isEditAvatarPopupOpen}
+          isLoading = {isLoading}
           onUpdateAvatar = {handleUpdateAvatar}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-          onLoading = {isLoading}
         />
 
         {/* Popup add cards */}
         <AddPlacePopup
           isOpen = {isAddPlacePopupOpen}
+          isLoading = {isLoading}
           onAddPlace = {handleAddPlaceSubmit}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-          onLoading = {isLoading}
         />
 
         {/* Popup delete card */}
         <DeleteCardPopup
           isOpen = {isDeleteCardPopupOpen}
+          isLoading = {isLoading}
           onDeleteCard = {handleDeleteCardSubmit}
           onPopupClick = {handleOverlayClick}
           onClose = {closeAllPopups}
-          onLoading = {isLoading}
         />
 
         {/* Popup view card */}

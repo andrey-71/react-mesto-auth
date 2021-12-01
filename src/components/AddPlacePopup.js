@@ -30,10 +30,10 @@ function AddPlacePopup(props) {
       title = "Новое место"
       textButton = "Создать"
       isOpen = {props.isOpen}
+      isLoading = {props.isLoading}
       onSubmit = {handleSubmit}
       onPopupClick = {props.onPopupClick}
       onClose = {props.onClose}
-      onLoading = {props.onLoading}
     >
       <label className="popup__input-element">
         <input
