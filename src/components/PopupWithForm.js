@@ -5,7 +5,7 @@ function PopupWithForm(props) {
 
   return(
     <div className={`popup ${props.isOpen ? 'popup_active' : ''} popup_type_${props.name}`}
-         onClick={props.onPopupClick}
+         onMouseDown={props.onPopupClick}
     >
       <div className="popup__container">
         <h2 className="popup__title">{props.title}</h2>
