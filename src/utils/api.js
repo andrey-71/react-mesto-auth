@@ -7,11 +7,11 @@ class Api {
 
   // Общий запрос всех данных с сервера
   getAppInfo() {
-    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+    return Promise.all([this._getUserInfo(), this._getInitialCards()]);
   }
 
   // Получение данных пользователя
-  getUserInfo() {
+  _getUserInfo() {
     return fetch(`${this._serverUrl}users/me`, {
       headers: this._receiveRequestHeaders
     })
@@ -19,7 +19,7 @@ class Api {
   }
 
   // Получение начальных карточек
-  getInitialCards() {
+  _getInitialCards() {
     return fetch(`${this._serverUrl}cards`, {
       headers: this._receiveRequestHeaders
     })
@@ -74,7 +74,7 @@ class Api {
   }
 
   // Установка/снятие лайка
-  changeLikeCardStatus(card, isLiked) {
+  setLikeCard(card, isLiked) {
     if (isLiked) {
       return fetch(`${this._serverUrl}cards/likes/${card._id}`, {
         method: 'PUT',
