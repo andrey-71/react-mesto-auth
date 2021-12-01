@@ -26,6 +26,7 @@ function App() {
   // - процесса загрузки данных на сервер
   const [isLoading, setIsLoading] = React.useState(false);
 
+
   // Получение карточек и данных пользователя, отрисовка на странице
   React.useEffect(() => {
     api.getAppInfo()
@@ -144,6 +145,7 @@ function App() {
       })
       .catch(err => console.log(`При постановке/снятии лайк произошла ошибка: ${err}`));
   }
+
 
 
   return (

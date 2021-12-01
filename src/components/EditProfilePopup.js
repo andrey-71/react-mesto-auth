@@ -26,11 +26,9 @@ function EditProfilePopup(props) {
   // Обработчики изменения инпутов
   function handleChangeName(evt) {
     setName(evt.target.value);
-    console.log(evt.target.validity.valid);
   }
   function handleChangeDescription(evt) {
     setDescription(evt.target.value);
-    console.log(evt.target.validity.valid);
   }
 
   // Обработчик формы
@@ -41,7 +39,6 @@ function EditProfilePopup(props) {
       about: description
     });
   }
-
   return (
     <PopupWithForm
       name = "edit-profile"
@@ -67,10 +64,7 @@ function EditProfilePopup(props) {
             minLength={2}
             maxLength={40}
           />
-          <span
-            className="popup__input-error"
-            id="input-profile-name-error"
-          />
+          <span className="popup__input-error" id="input-profile-name-error"/>
         </label>
         <label className="popup__input-element">
           <input
@@ -85,10 +79,7 @@ function EditProfilePopup(props) {
             minLength={2}
             maxLength={200}
           />
-          <span
-            className="popup__input-error"
-            id="input-profile-job-error"
-          />
+          <span className="popup__input-error" id="input-profile-job-error"/>
         </label>
       </>
     </PopupWithForm>
