@@ -2,24 +2,31 @@ import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
-  // Поля ввода
-  const newCardName = React.useRef('');
-  const newCardLink = React.useRef('');
+  // Стейт-переменные:
+  // - инпут с подписью карточки
+  const [name, setName] = React.useState('');
+  // - инпут с ссылкой карточки
+  const [link, setLink] = React.useState('');
+
+  // Обработчики изменения инпутов
+  function handleChangeName(evt) {
+    setName(evt.target.value);
+  }
+  function handleChangeLink(evt) {
+    setLink(evt.target.value);
+  }
 
   // Обработчик формы
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onAddPlace({
-      name: newCardName.current.value,
-      link: newCardLink.current.value
-    });
+    props.onAddPlace({name, link});
   }
 
   // Очистка полей ввода при закрытии попапа
   React.useEffect(() => {
     if (!props.isOpen) {
-      newCardName.current.value = '';
-      newCardLink.current.value = '';
+      setName('');
+      setLink('');
     }
   }, [props.isOpen]);
 
@@ -42,7 +49,8 @@ function AddPlacePopup(props) {
           className="popup__input popup__input_type_card-name"
           id="input-card-name"
           name="name"
-          ref={newCardName}
+          value={name}
+          onChange={handleChangeName}
           required
           minLength={2}
           maxLength={30}
@@ -56,7 +64,8 @@ function AddPlacePopup(props) {
           className="popup__input popup__input_type_card-link"
           id="input-card-link"
           name="link"
-          ref={newCardLink}
+          value={link}
+          onChange={handleChangeLink}
           required
         />
         <span className="popup__input-error" id="input-card-link-error"/>
