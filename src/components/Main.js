@@ -38,7 +38,7 @@ function Main(props) {
       </section>
       {/* Photo gallery */}
       <section className="card-gallery content__card-gallery">
-          {props.cards.map((card, key) => (
+          {props.cards.map((card) => (
             <Card
               card = {card}
               name = {card.name}
@@ -47,7 +47,7 @@ function Main(props) {
               onCardClick = {props.onCardClick}
               onCardLike = {props.onCardLike}
               onCardDelete = {props.onCardDelete}
-              key = {key}
+              key = {card._id}
             />
           ))}
       </section>

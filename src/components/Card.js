@@ -14,6 +14,7 @@ function Card(props) {
   const isLiked = props.card.likes.some(like => like._id === currentUser._id);
   const cardLikeButtonClassName = `card__like${isLiked ? ' card__like_active' : ''}`;
 
+
   return (
     <figure className="card">
       <img
