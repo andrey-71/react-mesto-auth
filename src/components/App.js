@@ -1,5 +1,6 @@
 import React from 'react';
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import {Routes, Route} from "react-router-dom";
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -162,6 +163,12 @@ function App() {
           onCardDelete = {handleCardDeleteClick}
           cards = {cards}
         />
+        <Routes>
+          <Route exact path='/'>
+
+          </Route>
+        </Routes>
+
         <Footer />
 
         {/* Popup edit user info */}
