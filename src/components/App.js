@@ -26,6 +26,13 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState( null);
   // - процесса загрузки данных на сервер
   const [isLoading, setIsLoading] = React.useState(false);
+  // - авторизации
+  const [isLogged, setIsLogged] = React.useState(false);
+
+  // Авторизация пользователя
+  function handleLogin() {
+    setIsLogged(true);
+  }
 
 
   // Получение карточек и данных пользователя, отрисовка на странице
@@ -164,7 +171,7 @@ function App() {
           cards = {cards}
         />
         <Routes>
-          <Route exact path='/'>
+          <Route path='/*'>
 
           </Route>
         </Routes>
