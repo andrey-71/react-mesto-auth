@@ -1,6 +1,7 @@
 import React from 'react';
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -10,6 +11,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
+
 
 
 function App() {
@@ -161,7 +163,9 @@ function App() {
       <div className="container">
 
         <Header />
-        <Main
+        <ProtectedRoute
+          component = {Main}
+          loggedIn = {isLogged}
           onEditAvatar = {handleEditAvatarClick}
           onEditProfile = {handleEditProfileClick}
           onAddPlace = {handleAddPlaceClick}
@@ -170,9 +174,10 @@ function App() {
           onCardDelete = {handleCardDeleteClick}
           cards = {cards}
         />
+
         <Routes>
           <Route path='/*'>
-
+            {isLogged ? <Navigate to='/main' /> : console.log('Подготовить компонент Login и прописать маршрут /sign-in')}
           </Route>
         </Routes>
 
