@@ -177,7 +177,7 @@ function App() {
 
         <Routes>
           <Route path='/*'>
-            {isLogged ? <Navigate to='/main' /> : console.log('Подготовить компонент Login и прописать маршрут /sign-in')}
+            {isLogged ? <Navigate to='/main' /> : console.log(`<Navigate to='/sign-in'`)}
           </Route>
         </Routes>
 
