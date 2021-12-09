@@ -10,6 +10,7 @@
 /*container el*/
 @import url(./blocks/container/__header/container__header.css);
 @import url(./blocks/container/__content/container__content.css);
+@import url(./blocks/container/__auth/container__auth.css);
 @import url(./blocks/container/__footer/container__footer.css);
 
 /*header bl*/
@@ -92,3 +93,16 @@
 /*popup-card-view mod*/
 @import url(./blocks/popup/_type/popup_type_card-view.css);
 
+/*auth bl*/
+@import url(./blocks/auth/auth.css);
+/*auth el*/
+@import url(./blocks/auth/__title/auth__title.css);
+@import url(./blocks/auth/__form/auth__form.css);
+@import url(./blocks/auth/__input/auth__input.css);
+@import url(./blocks/auth/__submit-button/auth__submit-button.css);
+/*auth mod*/
+@import url(./blocks/auth/_type/auth_type_login.css);
+@import url(./blocks/auth/_type/auth_type_registration.css);
+@import url(./blocks/auth/__form/_type/auth__form_type_login.css);
+@import url(./blocks/auth/__form/_type/auth__form_type_registration.css);
+@import url(./blocks/auth/__submit-button/_disabled/auth__submit-button_disabled.css);
