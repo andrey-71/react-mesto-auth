@@ -2,8 +2,6 @@ import React from 'react';
 
 function Login() {
 
-
-
   return (
     <div className='auth auth_type_login container__auth'>
       <h2 className='auth__title'>Вход</h2>
@@ -24,6 +22,7 @@ function Login() {
         />
         <button className='auth__submit-button' type='submit'>Войти</button>
       </form>
+      <div className='auth__sign-up'></div>
 
     </div>
   )

@@ -1,6 +1,6 @@
 .auth__title {
   margin: 0;
-  padding-bottom: 20px;
+  padding: 20px 0;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -12,4 +12,11 @@
   line-height: 1.21;
   text-align: center;
   color: #fff;
+}
+
+@media screen and (max-width: 424px){
+  .auth__title {
+    padding: 0 0 10px;
+    font-size: 20px;
+  }
 }

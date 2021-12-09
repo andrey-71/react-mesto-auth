@@ -100,9 +100,13 @@
 @import url(./blocks/auth/__form/auth__form.css);
 @import url(./blocks/auth/__input/auth__input.css);
 @import url(./blocks/auth/__submit-button/auth__submit-button.css);
+@import url(./blocks/auth/__sign-in/auth__sign-in.css);
+@import url(./blocks/auth/__sign-up/auth__sign-up.css);
+@import url(./blocks/auth/__registration-request-text/auth__registration-request-text.css);
+@import url(./blocks/auth/__login-link/auth__login-link.css);
 /*auth mod*/
 @import url(./blocks/auth/_type/auth_type_login.css);
-@import url(./blocks/auth/_type/auth_type_registration.css);
+@import url(blocks/auth/_type/auth_type_registr.css);
 @import url(./blocks/auth/__form/_type/auth__form_type_login.css);
-@import url(./blocks/auth/__form/_type/auth__form_type_registration.css);
+@import url(blocks/auth/__form/_type/auth__form_type_registr.css);
 @import url(./blocks/auth/__submit-button/_disabled/auth__submit-button_disabled.css);
