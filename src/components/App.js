@@ -3,6 +3,8 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import {Routes, Route, Navigate} from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Header from './Header';
+import Login from './Login';
+import Register from "./Register";
 import Main from './Main';
 import Footer from './Footer';
 import EditProfilePopup from "./EditProfilePopup";
@@ -157,74 +159,80 @@ function App() {
   }
 
 
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="container">
 
         <Header />
-        <ProtectedRoute
-          component = {Main}
-          loggedIn = {isLogged}
-          onEditAvatar = {handleEditAvatarClick}
-          onEditProfile = {handleEditProfileClick}
-          onAddPlace = {handleAddPlaceClick}
-          onCardClick = {handleCardClick}
-          onCardLike = {handleCardLike}
-          onCardDelete = {handleCardDeleteClick}
-          cards = {cards}
-        />
 
         <Routes>
-          <Route path='/*'>
-            {isLogged ? <Navigate to='/main' /> : console.log(`<Navigate to='/sign-in'`)}
-          </Route>
+          {/* Страница авторизации */}
+          <Route path='/sign-in' element={<Login />}/>
+          {/* Страница регистрации */}
+          <Route path='/sign-up' element={<Register />}/>
+
+          {/* Главная страница */}
+          <Route path='/' element={
+            <ProtectedRoute>
+              <Main
+                loggedIn = {isLogged}
+                onEditAvatar = {handleEditAvatarClick}
+                onEditProfile = {handleEditProfileClick}
+                onAddPlace = {handleAddPlaceClick}
+                onCardClick = {handleCardClick}
+                onCardLike = {handleCardLike}
+                onCardDelete = {handleCardDeleteClick}
+                cards = {cards}
+              />
+
+              {/* Popup edit user info */}
+              <EditProfilePopup
+                isOpen = {isEditProfilePopupOpen}
+                isLoading = {isLoading}
+                onUpdateUser = {handleUpdateUser}
+                onPopupClick = {handleOverlayClick}
+                onClose = {closeAllPopups}
+              />
+
+              {/* Popup edit user avatar */}
+              <EditAvatarPopup
+                isOpen = {isEditAvatarPopupOpen}
+                isLoading = {isLoading}
+                onUpdateAvatar = {handleUpdateAvatar}
+                onPopupClick = {handleOverlayClick}
+                onClose = {closeAllPopups}
+              />
+
+              {/* Popup add cards */}
+              <AddPlacePopup
+                isOpen = {isAddPlacePopupOpen}
+                isLoading = {isLoading}
+                onAddPlace = {handleAddPlaceSubmit}
+                onPopupClick = {handleOverlayClick}
+                onClose = {closeAllPopups}
+              />
+
+              {/* Popup delete card */}
+              <DeleteCardPopup
+                isOpen = {isDeleteCardPopupOpen}
+                isLoading = {isLoading}
+                onDeleteCard = {handleDeleteCardSubmit}
+                onPopupClick = {handleOverlayClick}
+                onClose = {closeAllPopups}
+              />
+
+              {/* Popup view card */}
+              <ImagePopup
+                card = {selectedCard}
+                onPopupClick = {handleOverlayClick}
+                onClose = {closeAllPopups}
+              />
+            </ProtectedRoute>
+          }/>
+
         </Routes>
 
         <Footer />
-
-        {/* Popup edit user info */}
-        <EditProfilePopup
-          isOpen = {isEditProfilePopupOpen}
-          isLoading = {isLoading}
-          onUpdateUser = {handleUpdateUser}
-          onPopupClick = {handleOverlayClick}
-          onClose = {closeAllPopups}
-        />
-
-        {/* Popup edit user avatar */}
-        <EditAvatarPopup
-          isOpen = {isEditAvatarPopupOpen}
-          isLoading = {isLoading}
-          onUpdateAvatar = {handleUpdateAvatar}
-          onPopupClick = {handleOverlayClick}
-          onClose = {closeAllPopups}
-        />
-
-        {/* Popup add cards */}
-        <AddPlacePopup
-          isOpen = {isAddPlacePopupOpen}
-          isLoading = {isLoading}
-          onAddPlace = {handleAddPlaceSubmit}
-          onPopupClick = {handleOverlayClick}
-          onClose = {closeAllPopups}
-        />
-
-        {/* Popup delete card */}
-        <DeleteCardPopup
-          isOpen = {isDeleteCardPopupOpen}
-          isLoading = {isLoading}
-          onDeleteCard = {handleDeleteCardSubmit}
-          onPopupClick = {handleOverlayClick}
-          onClose = {closeAllPopups}
-        />
-
-        {/* Popup view card */}
-        <ImagePopup
-          card = {selectedCard}
-          onPopupClick = {handleOverlayClick}
-          onClose = {closeAllPopups}
-        />
 
       </div>
     </CurrentUserContext.Provider>

@@ -1,18 +1,9 @@
 import React from "react";
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
-const ProtectedRoute = ({component: Component, ...props}) => {
-  return (
-    <Routes>
-      <Route>
-        {
-          () => props.loggedIn ? <Component {...props} /> : console.log(`<Navigate to='./sign-in'`)
-        }
-
-      </Route>
-    </Routes>
-
-  )
+const ProtectedRoute = (props) => {
+  {/* Доступ на главную страницу только для авторизованных пользователей */}
+  return props.loggedIn ? props.children : <Navigate to='/sign-in' />
 }
 
 export default ProtectedRoute;
