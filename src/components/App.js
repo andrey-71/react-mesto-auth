@@ -1,6 +1,6 @@
 import React from 'react';
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Header from './Header';
 import Login from './Login';
@@ -37,7 +37,6 @@ function App() {
   function handleLogin() {
     setIsLogged(true);
   }
-
 
   // Получение карточек и данных пользователя, отрисовка на странице
   React.useEffect(() => {
@@ -229,7 +228,6 @@ function App() {
               />
             </ProtectedRoute>
           }/>
-
         </Routes>
 
         <Footer />

@@ -12,7 +12,7 @@ class Api {
 
   // Получение данных пользователя
   _getUserInfo() {
-    return fetch(`${this._serverUrl}users/me`, {
+    return fetch(`${this._serverUrl}/users/me`, {
       headers: this._receiveRequestHeaders
     })
       .then(res => this._handleResult(res));
@@ -20,7 +20,7 @@ class Api {
 
   // Получение начальных карточек
   _getInitialCards() {
-    return fetch(`${this._serverUrl}cards`, {
+    return fetch(`${this._serverUrl}/cards`, {
       headers: this._receiveRequestHeaders
     })
       .then(res => this._handleResult(res));
@@ -28,7 +28,7 @@ class Api {
 
   // Отправка данных пользователя
   setUserInfo(data) {
-    return fetch(`${this._serverUrl}users/me`, {
+    return fetch(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
       headers: this._sendRequestHeaders,
       body: JSON.stringify({
@@ -41,7 +41,7 @@ class Api {
 
   // Отправка аватара пользователя
   setUserAvatar(data) {
-    return fetch(`${this._serverUrl}users/me/avatar`, {
+    return fetch(`${this._serverUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._sendRequestHeaders,
       body: JSON.stringify({
@@ -53,7 +53,7 @@ class Api {
 
   // Отправка новой карточки
   setNewCard(data) {
-    return fetch(`${this._serverUrl}cards`, {
+    return fetch(`${this._serverUrl}/cards`, {
       method: 'POST',
       headers: this._sendRequestHeaders,
       body: JSON.stringify({
@@ -66,7 +66,7 @@ class Api {
 
   // Удаление карточки
   deleteCard(data) {
-    return fetch(`${this._serverUrl}cards/${data._id}`, {
+    return fetch(`${this._serverUrl}/cards/${data._id}`, {
       method: 'DELETE',
       headers: this._receiveRequestHeaders
     })
@@ -76,13 +76,13 @@ class Api {
   // Установка/снятие лайка
   setLikeCard(card, isLiked) {
     if (isLiked) {
-      return fetch(`${this._serverUrl}cards/likes/${card._id}`, {
+      return fetch(`${this._serverUrl}/cards/likes/${card._id}`, {
         method: 'PUT',
         headers: this._sendRequestHeaders
       })
         .then(res => this._handleResult(res));
     } else {
-      return fetch(`${this._serverUrl}cards/likes/${card._id}`, {
+      return fetch(`${this._serverUrl}/cards/likes/${card._id}`, {
         method: 'DELETE',
         headers: this._receiveRequestHeaders
       })
@@ -101,7 +101,7 @@ class Api {
 }
 
 const api = new Api({
-  serverUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/',
+  serverUrl: 'https://mesto.nomoreparties.co/v1/cohort-29',
   receiveRequestHeaders: {
     authorization: '47bf35c3-c8a1-495a-9dd2-8537c372d068'
   },

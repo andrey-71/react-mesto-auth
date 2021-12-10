@@ -1,9 +1,40 @@
 import React from 'react';
+import auth from '../utils/auth';
 import {Link, useNavigate} from 'react-router-dom';
 
 
 function Register() {
   const navigate = useNavigate();
+
+  // Стейт-переменные инпутов
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  // Обработчик изменения сотсояния инпутов
+  function handleChangeEmail(evt) {
+    setEmail(evt.target.value);
+  }
+  function handleChangePassword(evt) {
+    setPassword(evt.target.value);
+  }
+
+  // Обработчик формы
+
+
+
+
+
+  // React.useEffect(() => {
+  //   auth.register({
+  //     email: 'email@yandex.ru',
+  //     password: 'somepassword'
+  //   })
+  //     .then((res) => {
+  //       console.log(res)
+  //     })
+  //     .catch(err => console.log(`При регистрации произошла ошибка: ${err}`));
+  //     // .catch(err => console.log(`Reject: ${err.error}`));
+  // }, [])
 
   return (
     <div className='auth auth_type_registr container__auth'>
@@ -15,6 +46,7 @@ function Register() {
           type='email'
           placeholder='Email'
           required
+          onChange={handleChangeEmail}
         />
         <input
           className='auth__input'
@@ -22,6 +54,7 @@ function Register() {
           type='text'
           placeholder='Пароль'
           required
+          onChange={handleChangePassword}
         />
         <button className='auth__submit-button' type='submit'>Зарегистрироваться</button>
       </form>
