@@ -19,27 +19,26 @@ function Register() {
   }
 
   // Обработчик формы
+  function handleSubmit(evt) {
+    evt.preventDefault();
 
+    auth.register({email, password})
+      .then(() => {
+        navigate('/sign-in');
+        setEmail('');
+        setPassword('');
+      })
+      .catch(err => console.log(`При регистрации произошла ошибка: ${err}`));
+  }
 
-
-
-
-  // React.useEffect(() => {
-  //   auth.register({
-  //     email: 'email@yandex.ru',
-  //     password: 'somepassword'
-  //   })
-  //     .then((res) => {
-  //       console.log(res)
-  //     })
-  //     .catch(err => console.log(`При регистрации произошла ошибка: ${err}`));
-  //     // .catch(err => console.log(`Reject: ${err.error}`));
-  // }, [])
 
   return (
     <div className='auth auth_type_registr container__auth'>
       <h2 className='auth__title'>Регистрация</h2>
-      <form className='auth__form auth__form_type_registr'>
+      <form
+        className='auth__form auth__form_type_registr'
+        onSubmit={handleSubmit}
+      >
         <input
           className='auth__input'
           name='emailUser'
