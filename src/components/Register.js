@@ -10,7 +10,7 @@ function Register() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  // Обработчик изменения сотсояния инпутов
+  // Обработчики изменения сотсояния инпутов
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }

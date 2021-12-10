@@ -1,7 +1,21 @@
 import React from 'react';
 import auth from '../utils/auth';
+import {useNavigate} from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
+  // Стейт-переменные инпутов
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  // Обработчики изменения сотсояния инпутов
+  function handleChangeEmail(evt) {
+    setEmail(evt.target.value);
+  }
+  function handleChangePassword(evt) {
+    setPassword(evt.target.value);
+  }
 
   return (
     <div className='auth auth_type_login container__auth'>
@@ -13,6 +27,7 @@ function Login() {
           type='email'
           placeholder='Email'
           required
+          onChange={handleChangeEmail}
         />
         <input
           className='auth__input'
@@ -20,6 +35,7 @@ function Login() {
           type='text'
           placeholder='Пароль'
           required
+          onChange={handleChangePassword}
         />
         <button className='auth__submit-button' type='submit'>Войти</button>
       </form>
