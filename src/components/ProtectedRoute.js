@@ -3,7 +3,7 @@ import {Navigate} from "react-router-dom";
 
 const ProtectedRoute = (props) => {
   {/* Доступ на главную страницу только для авторизованных пользователей */}
-  return props.loggedIn ? props.children : <Navigate to='/sign-in' />
+  return props.isLogin ? props.children : <Navigate to='/sign-in' />
 }
 
 export default ProtectedRoute;

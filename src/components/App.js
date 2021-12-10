@@ -166,15 +166,14 @@ function App() {
 
         <Routes>
           {/* Страница авторизации */}
-          <Route path='/sign-in' element={<Login />}/>
+          <Route path='/sign-in' element={<Login onLogin={handleLogin} />}/>
           {/* Страница регистрации */}
           <Route path='/sign-up' element={<Register />}/>
 
           {/* Главная страница */}
           <Route path='/' element={
-            <ProtectedRoute>
+            <ProtectedRoute isLogin={isLogged}>
               <Main
-                loggedIn = {isLogged}
                 onEditAvatar = {handleEditAvatarClick}
                 onEditProfile = {handleEditProfileClick}
                 onAddPlace = {handleAddPlaceClick}

@@ -2,7 +2,7 @@ import React from 'react';
 import auth from '../utils/auth';
 import {useNavigate} from "react-router-dom";
 
-function Login() {
+function Login(props) {
   const navigate = useNavigate();
 
   // Стейт-переменные инпутов
@@ -17,10 +17,29 @@ function Login() {
     setPassword(evt.target.value);
   }
 
+  // Обработчик формы
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    auth.authorize({email, password})
+      .then((res) => {
+        if (res.token) {
+          setEmail('');
+          setPassword('');
+          localStorage.setItem('token', res.token);
+          navigate('/');
+        }
+      })
+      .catch(err => console.log(`При авторизации произошла ошибка: ${err}`));
+  }
+
   return (
     <div className='auth auth_type_login container__auth'>
       <h2 className='auth__title'>Вход</h2>
-      <form className='auth__form auth__form_type_login'>
+      <form
+        className='auth__form auth__form_type_login'
+        onSubmit={handleSubmit}
+      >
         <input
           className='auth__input'
           name='emailUser'
