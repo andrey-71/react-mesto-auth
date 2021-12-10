@@ -4,8 +4,22 @@ class Auth {
     this._headers = options.headers;
   }
 
+  // Регистрация пользователя
   register(data) {
     return fetch(`${this._serverAuthUrl}/signup`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password
+      })
+    })
+      .then(res => this._handleResult(res))
+  }
+
+  // Авторизация пользователя
+  authorize(data) {
+    return fetch(`${this._serverAuthUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
