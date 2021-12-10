@@ -27,7 +27,7 @@ function Register() {
       </form>
       <div className='auth__sign-in'>
         <p className='auth__registration-request-text'>Уже зарегистрированы?</p>
-        <Link to='../sign-in' className='auth__login-link'>Войти</Link>
+        <Link to='/sign-in' className='auth__login-link'>Войти</Link>
       </div>
 
     </div>
