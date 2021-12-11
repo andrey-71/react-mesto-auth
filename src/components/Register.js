@@ -50,7 +50,7 @@ function Register() {
         <input
           className='auth__input'
           name='passwordUser'
-          type='text'
+          type='password'
           placeholder='Пароль'
           required
           onChange={handleChangePassword}

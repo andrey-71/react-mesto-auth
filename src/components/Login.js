@@ -27,6 +27,7 @@ function Login(props) {
           setEmail('');
           setPassword('');
           localStorage.setItem('token', res.token);
+          props.onLogin();
           navigate('/');
         }
       })
@@ -51,7 +52,7 @@ function Login(props) {
         <input
           className='auth__input'
           name='passwordUser'
-          type='text'
+          type='password'
           placeholder='Пароль'
           required
           onChange={handleChangePassword}
