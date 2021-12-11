@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import InfoTooltip from './InfoTooltip';
 
 
-function Register() {
+function Register(props) {
   const navigate = useNavigate();
 
   // Стейт-переменные
@@ -28,11 +28,17 @@ function Register() {
 
     auth.register({email, password})
       .then(() => {
-        navigate('/sign-in');
+        // navigate('/sign-in');
+        setIsRegistered(true);
+        props.onInfoTooltip();
         setEmail('');
         setPassword('');
       })
-      .catch(err => console.log(`При регистрации произошла ошибка: ${err}`));
+      .catch((err) => {
+        console.log(`При регистрации произошла ошибка: ${err}`);
+        setIsRegistered(true);
+        props.onInfoTooltip();
+      })
   }
 
 
@@ -67,7 +73,12 @@ function Register() {
           <Link to='/sign-in' className='auth__login-link'>Войти</Link>
         </div>
       </div>
-      <InfoTooltip status={isRegistered}/>
+      <InfoTooltip
+        isOpen={props.isOpen}
+        onClose={props.onClose}
+        onPopupClick={props.onPopupClick}
+        status={isRegistered}
+      />
     </>
   )
 }

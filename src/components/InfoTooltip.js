@@ -3,7 +3,7 @@ import React from 'react';
 function InfoTooltip(props) {
 
   return (
-    <div className={`popup popup_active popup_type_info-tooltip`}
+    <div className={`popup ${props.isOpen ? 'popup_active' : ''} popup_type_info-tooltip`}
          onMouseDown={props.onPopupClick}
     >
       <div className='popup__container'>
