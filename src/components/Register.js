@@ -28,15 +28,18 @@ function Register(props) {
 
     auth.register({email, password})
       .then(() => {
-        // navigate('/sign-in');
+
         setIsRegistered(true);
         props.onInfoTooltip();
-        setEmail('');
-        setPassword('');
+        setTimeout(() => {
+          setEmail('');
+          setPassword('');
+          navigate('/sign-in');
+        }, 2000)
       })
       .catch((err) => {
         console.log(`При регистрации произошла ошибка: ${err}`);
-        setIsRegistered(true);
+        setIsRegistered(false);
         props.onInfoTooltip();
       })
   }
