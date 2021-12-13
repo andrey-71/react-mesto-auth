@@ -14,34 +14,34 @@ function Register(props) {
   // - регистрации
   const [isRegistered, setIsRegistered] = React.useState(false);
 
-  // Обработчики изменения сотсояния инпутов
+  // Обработчики изменения состояния инпутов
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }
   function handleChangePassword(evt) {
     setPassword(evt.target.value);
   }
-
-  // Обработчик формы
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
+  // Регистрация пользователя
+  function onRegister() {
     auth.register({email, password})
       .then(() => {
-
         setIsRegistered(true);
         props.onInfoTooltip();
         setTimeout(() => {
-          setEmail('');
-          setPassword('');
           navigate('/sign-in');
         }, 2000)
       })
       .catch((err) => {
-        console.log(`При регистрации произошла ошибка: ${err}`);
         setIsRegistered(false);
         props.onInfoTooltip();
+        console.log(`При регистрации произошла ошибка: ${err}`);
       })
+  }
+
+  // Обработчик формы
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onRegister();
   }
 
 
