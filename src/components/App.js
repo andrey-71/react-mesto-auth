@@ -33,6 +33,8 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   // - авторизации
   const [isLogged, setIsLogged] = React.useState(true);
+  // - email пользователя
+  const [isEmailUser, setIsEmailUser] = React.useState('');
 
   // Авторизация пользователя
   function handleLogin() {
@@ -46,7 +48,7 @@ function App() {
       auth.checkToken(userToken)
         .then((res) => {
           setIsLogged(true);
-          console.log(res);
+          setIsEmailUser(res.data.email);
         })
         .catch(err => console.log(`Токен не найден: ${err}`))
     } else {
@@ -54,7 +56,6 @@ function App() {
     }
   }, [])
 
-  console.log(isLogged);
 
   // Получение карточек и данных пользователя, отрисовка на странице
   React.useEffect(() => {
@@ -194,14 +195,14 @@ function App() {
           {/* Страница авторизации */}
           <Route path='/sign-in' element={
             <>
-              <Header/>
+              <Header link={'/sign-up'} textAuth={'Регистрация'}/>
               <Login onLogin={handleLogin}/>
             </>
           }/>
           {/* Страница регистрации */}
           <Route path='/sign-up' element={
             <>
-              <Header/>
+              <Header link={'/sign-in'} textAuth={'Войти'}/>
               <Register
                 onInfoTooltip={handleInfoTooltipClick}
                 isOpen={isInfoTooltipPopupOpen}
@@ -214,7 +215,7 @@ function App() {
           {/* Главная страница */}
           <Route path='/' element={
             <>
-              <Header/>
+              <Header link={'sign-in'} emailUser={isEmailUser} textAuth={'Выйти'}/>
               <ProtectedRoute isLogin={isLogged}>
                 <Main
                   onEditAvatar={handleEditAvatarClick}
