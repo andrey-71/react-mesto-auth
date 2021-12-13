@@ -16,22 +16,23 @@ function Login(props) {
   function handleChangePassword(evt) {
     setPassword(evt.target.value);
   }
-
-  // Обработчик формы
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
+  // Авторизация пользователя
+  function onLogin() {
     auth.authorize({email, password})
       .then((res) => {
         if (res.token) {
-          setEmail('');
-          setPassword('');
           localStorage.setItem('token', res.token);
           props.onLogin();
           navigate('/');
         }
       })
       .catch(err => console.log(`При авторизации произошла ошибка: ${err}`));
+  }
+
+  // Обработчик формы
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onLogin();
   }
 
   return (
