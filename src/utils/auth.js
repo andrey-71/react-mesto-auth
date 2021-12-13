@@ -1,14 +1,15 @@
 class Auth {
-  constructor(options) {
-    this._serverAuthUrl = options.serverAuthUrl;
-    this._headers = options.headers;
+  constructor(serverAuthUrl) {
+    this._serverAuthUrl = serverAuthUrl;
   }
 
   // Регистрация пользователя
   register(data) {
     return fetch(`${this._serverAuthUrl}/signup`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         email: data.email,
         password: data.password
@@ -21,7 +22,9 @@ class Auth {
   authorize(data) {
     return fetch(`${this._serverAuthUrl}/signin`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         email: data.email,
         password: data.password
@@ -30,22 +33,26 @@ class Auth {
       .then(res => this._handleResult(res))
   }
 
+  // Проверка корректности токена, получение email пользователя
+  checkToken(token) {
+    return fetch(`${this._serverAuthUrl}/users/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+      .then(res => this._handleResult(res))
+  }
+
+
   // Обработчик результата запроса
   _handleResult(res) {
     if (res.ok) {
       return res.json();
     }
     return Promise.reject(`"${res.status} ${res.statusText}"`);
-
-    // const err = res.json();
-    // return res.json()
   }
 }
 
-const auth = new Auth({
-  serverAuthUrl: 'https://auth.nomoreparties.co',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+const auth = new Auth('https://auth.nomoreparties.co');
 export default auth;

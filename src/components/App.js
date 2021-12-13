@@ -1,6 +1,6 @@
 import React from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Header from './Header';
 import Login from './Login';
@@ -12,6 +12,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
 import ImagePopup from './ImagePopup';
+import auth from '../utils/auth';
 import api from '../utils/api';
 
 
@@ -31,12 +32,29 @@ function App() {
   // - процесса загрузки данных на сервер
   const [isLoading, setIsLoading] = React.useState(false);
   // - авторизации
-  const [isLogged, setIsLogged] = React.useState(false);
+  const [isLogged, setIsLogged] = React.useState(true);
 
   // Авторизация пользователя
   function handleLogin() {
     setIsLogged(true);
   }
+
+  // Проверка наличия сохраненных данных пользователя и автоматическая авторизация
+  React.useEffect(() => {
+    const userToken = localStorage.getItem('token');
+    if(userToken) {
+      auth.checkToken(userToken)
+        .then((res) => {
+          setIsLogged(true);
+          console.log(res);
+        })
+        .catch(err => console.log(`Токен не найден: ${err}`))
+    } else {
+      setIsLogged(false);
+    }
+  }, [])
+
+  console.log(isLogged);
 
   // Получение карточек и данных пользователя, отрисовка на странице
   React.useEffect(() => {
@@ -172,6 +190,9 @@ function App() {
         <Header/>
 
         <Routes>
+          <Route path='*' element={
+            <Navigate to={isLogged ? '/' : '/sign-in'}/>
+          }/>
           {/* Страница авторизации */}
           <Route path='/sign-in' element={
             <Login onLogin={handleLogin}/>
