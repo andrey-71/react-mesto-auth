@@ -189,27 +189,30 @@ function App() {
       <div className='container'>
 
         <Routes>
-          <Route path='*' element={
-            <Navigate to={isLogged ? '/' : '/sign-in'}/>
-          }/>
           {/* Страница авторизации */}
           <Route path='/sign-in' element={
-            <>
-              <Header link={'/sign-up'} textAuth={'Регистрация'}/>
-              <Login onLogin={handleLogin}/>
-            </>
+            isLogged ?
+              <Navigate to='/' />
+              :
+              <>
+                <Header link={'/sign-up'} textAuth={'Регистрация'}/>
+                <Login onLogin={handleLogin}/>
+              </>
           }/>
           {/* Страница регистрации */}
           <Route path='/sign-up' element={
-            <>
-              <Header link={'/sign-in'} textAuth={'Войти'}/>
-              <Register
-                onInfoTooltip={handleInfoTooltipClick}
-                isOpen={isInfoTooltipPopupOpen}
-                onClose={closeAllPopups}
-                onPopupClick={handleOverlayClick}
-              />
-            </>
+            isLogged ?
+              <Navigate to='/' />
+              :
+              <>
+                <Header link={'/sign-in'} textAuth={'Войти'}/>
+                <Register
+                  onInfoTooltip={handleInfoTooltipClick}
+                  isOpen={isInfoTooltipPopupOpen}
+                  onClose={closeAllPopups}
+                  onPopupClick={handleOverlayClick}
+                />
+              </>
           }/>
 
           {/* Главная страница */}
