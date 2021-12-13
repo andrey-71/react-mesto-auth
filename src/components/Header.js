@@ -5,6 +5,7 @@ import logo from '../images/header-logo.svg'
 
 
 function Header(props) {
+
   return (
     <header className='header container__header'>
       <img
@@ -14,7 +15,13 @@ function Header(props) {
       />
       <div className='header__user-link-container'>
         <p className='header__email-user'>{props.emailUser}</p>
-        <Link to={props.link} className='header__link'>{props.textAuth}</Link>
+        <Link
+          to={props.link}
+          className='header__link'
+          onClick={props.onSignOut}
+        >
+          {props.textAuth}
+        </Link>
       </div>
     </header>
   )

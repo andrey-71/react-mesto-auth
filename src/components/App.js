@@ -56,6 +56,12 @@ function App() {
     }
   }, [])
 
+  // Выход из учетной записи
+  function onSignOut() {
+    localStorage.removeItem('token');
+    setIsLogged(false);
+  }
+
 
   // Получение карточек и данных пользователя, отрисовка на странице
   React.useEffect(() => {
@@ -218,7 +224,12 @@ function App() {
           {/* Главная страница */}
           <Route path='/' element={
             <>
-              <Header link={'sign-in'} emailUser={isEmailUser} textAuth={'Выйти'}/>
+              <Header
+                link={'sign-in'}
+                emailUser={isEmailUser}
+                textAuth={'Выйти'}
+                onSignOut={onSignOut}
+              />
               <ProtectedRoute isLogin={isLogged}>
                 <Main
                   onEditAvatar={handleEditAvatarClick}
