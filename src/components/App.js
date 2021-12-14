@@ -229,6 +229,7 @@ function App() {
                 emailUser={isEmailUser}
                 textAuth={'Выйти'}
                 onSignOut={onSignOut}
+                isLogged={isLogged}
               />
               <ProtectedRoute isLogin={isLogged}>
                 <Main
