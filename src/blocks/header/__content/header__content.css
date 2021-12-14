@@ -19,7 +19,6 @@
   .header__content {
     padding-left: 0;
     padding-right: 0;
-    flex-direction: column-reverse;
   }
 }
 

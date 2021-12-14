@@ -9,7 +9,7 @@ function Header(props) {
     <header className='header container__header'>
 
       {props.isLogged ?
-        <div className='header__content'>
+        <div className='header__content header__content_type_login'>
           <input id='header__menu-toggle' className='header__menu-toggle' type='checkbox'/>
           <div className='header__logo-container'>
             <img
@@ -33,8 +33,7 @@ function Header(props) {
           </div>
         </div>
         :
-        <div className='header__content'>
-          <div>
+        <div className='header__content header__content_type_logout'>
             <img
               className='header__logo'
               src={logo}
@@ -47,7 +46,6 @@ function Header(props) {
             >
               {props.textAuth}
             </Link>
-          </div>
         </div>
       }
 
