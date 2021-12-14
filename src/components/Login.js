@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React from 'react';
 import auth from '../utils/auth';
 import {useNavigate} from "react-router-dom";
 
@@ -6,8 +6,8 @@ function Login(props) {
   const navigate = useNavigate();
 
   // Стейт-переменные инпутов
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   // Обработчики изменения состояния инпутов
   function handleChangeEmail(evt) {

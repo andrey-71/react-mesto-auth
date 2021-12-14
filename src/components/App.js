@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import React from 'react';
 import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import ProtectedRoute from './ProtectedRoute';
@@ -17,25 +17,24 @@ import api from '../utils/api';
 
 
 function App() {
-  const navigate = useNavigate()
   // Стейт-переменные:
   // - данных пользователя
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
   // - карточек
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = React.useState([]);
   // - попапов
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
   // - процесса загрузки данных на сервер
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   // - авторизации
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = React.useState(false);
   // - email пользователя
-  const [isEmailUser, setIsEmailUser] = useState('');
+  const [isEmailUser, setIsEmailUser] = React.useState('');
 
   // Авторизация пользователя
   function handleLogin() {
@@ -47,7 +46,7 @@ function App() {
   }
 
   // Проверка наличия сохраненных данных пользователя и автоматическая авторизация
-  useEffect(() => {
+  React.useEffect(() => {
     const userToken = localStorage.getItem('token');
     if(userToken) {
       auth.checkToken(userToken)
@@ -69,7 +68,7 @@ function App() {
 
 
   // Получение карточек и данных пользователя, отрисовка на странице
-  useEffect(() => {
+  React.useEffect(() => {
     api.getAppInfo()
       .then(([getUserInfo, getInitialCards]) => {
         setCurrentUser(getUserInfo);
@@ -109,7 +108,7 @@ function App() {
     setSelectedCard(null);
   }
   // Закрытие попапа при нажатии Esc
-  useEffect(() => {
+  React.useEffect(() => {
     if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isDeleteCardPopupOpen || isInfoTooltipPopupOpen || selectedCard) {
       const handleEscClick = (evt) => {
         if (evt.key === 'Escape') {

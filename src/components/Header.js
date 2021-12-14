@@ -15,7 +15,7 @@ function Header(props) {
               src={logo}
               alt='Логотип Место'
             />
-            <label className='header__menu' htmlFor='header__menu-toggle'>*/}
+            <label className='header__menu' htmlFor='header__menu-toggle'> /}
               <span className='header__menu-item'></span>
             </label>
           </div>

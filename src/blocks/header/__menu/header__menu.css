@@ -24,6 +24,7 @@
     background-color: #fff;
     width: 100%;
     height: 3px;
+    transition: all .4s ease 0s;
   }
   
   .header__menu::before {
@@ -34,6 +35,15 @@
   .header__menu::after {
     top: 18px;
     left: 0;
+  }
+
+  .header__menu-toggle:checked ~ .header__logo-container > .header__menu::before {
+    transform: rotate(45deg);
+    top: 9px;
+  }
+
+  .header__menu-toggle:checked ~ .header__logo-container > .header__menu::after {
+    transform: scale(0);
   }
 }
 
