@@ -9,7 +9,7 @@ function Login(props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  // Обработчики изменения сотсояния инпутов
+  // Обработчики изменения состояния инпутов
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }
