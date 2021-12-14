@@ -1,12 +1,12 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
   // Стейт-переменные:
   // - инпут с подписью карточки
-  const [name, setName] = React.useState('');
+  const [name, setName] = useState('');
   // - инпут с ссылкой карточки
-  const [link, setLink] = React.useState('');
+  const [link, setLink] = useState('');
 
   // Обработчики изменения инпутов
   function handleChangeName(evt) {
@@ -23,7 +23,7 @@ function AddPlacePopup(props) {
   }
 
   // Очистка полей ввода при закрытии попапа
-  React.useEffect(() => {
+  useEffect(() => {
     if (!props.isOpen) {
       setName('');
       setLink('');

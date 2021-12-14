@@ -1,4 +1,3 @@
-import React from 'react';
 import {Link} from "react-router-dom";
 import logo from '../images/header-logo.svg'
 
@@ -7,7 +6,6 @@ function Header(props) {
 
   return (
     <header className='header container__header'>
-
       {props.isLogged ?
         <div className='header__content header__content_type_login'>
           <input id='header__menu-toggle' className='header__menu-toggle' type='checkbox'/>

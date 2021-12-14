@@ -1,6 +1,6 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
+import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import {Routes, Route, Navigate} from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Header from './Header';
 import Login from './Login';
@@ -17,42 +17,47 @@ import api from '../utils/api';
 
 
 function App() {
+  const navigate = useNavigate()
   // Стейт-переменные:
   // - данных пользователя
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = useState({});
   // - карточек
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = useState([]);
   // - попапов
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
   // - процесса загрузки данных на сервер
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // - авторизации
-  const [isLogged, setIsLogged] = React.useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   // - email пользователя
-  const [isEmailUser, setIsEmailUser] = React.useState('');
+  const [isEmailUser, setIsEmailUser] = useState('');
 
   // Авторизация пользователя
   function handleLogin() {
     setIsLogged(true);
   }
+  // Запись email пользователя
+  function handleEmailUser(email) {
+    setIsEmailUser(email);
+  }
 
   // Проверка наличия сохраненных данных пользователя и автоматическая авторизация
-  React.useEffect(() => {
+  useEffect(() => {
     const userToken = localStorage.getItem('token');
     if(userToken) {
       auth.checkToken(userToken)
         .then((res) => {
-          setIsLogged(true);
-          setIsEmailUser(res.data.email);
+          if(res) {
+            setIsLogged(true);
+            setIsEmailUser(res.data.email);
+          }
         })
         .catch(err => console.log(`Токен не найден: ${err}`))
-    } else {
-      setIsLogged(false);
     }
   }, [])
 
@@ -64,7 +69,7 @@ function App() {
 
 
   // Получение карточек и данных пользователя, отрисовка на странице
-  React.useEffect(() => {
+  useEffect(() => {
     api.getAppInfo()
       .then(([getUserInfo, getInitialCards]) => {
         setCurrentUser(getUserInfo);
@@ -104,7 +109,7 @@ function App() {
     setSelectedCard(null);
   }
   // Закрытие попапа при нажатии Esc
-  React.useEffect(() => {
+  useEffect(() => {
     if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isDeleteCardPopupOpen || isInfoTooltipPopupOpen || selectedCard) {
       const handleEscClick = (evt) => {
         if (evt.key === 'Escape') {
@@ -202,7 +207,10 @@ function App() {
               :
               <>
                 <Header link={'/sign-up'} textAuth={'Регистрация'}/>
-                <Login onLogin={handleLogin}/>
+                <Login
+                  onLogin={handleLogin}
+                  onEmailUser={handleEmailUser}
+                />
               </>
           }/>
           {/* Страница регистрации */}
