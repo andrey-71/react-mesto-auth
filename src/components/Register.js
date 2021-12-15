@@ -1,49 +1,25 @@
 import React from 'react';
-import auth from '../utils/auth';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import InfoTooltip from './InfoTooltip';
 
 
 function Register(props) {
-  const navigate = useNavigate();
-
-  // Стейт-переменные
-  // - инпутов
+  // Стейты инпутов
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  // - регистрации
-  const [isRegistered, setIsRegistered] = React.useState(false);
 
   // Обработчики изменения состояния инпутов
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }
-
   function handleChangePassword(evt) {
     setPassword(evt.target.value);
-  }
-
-  // Регистрация пользователя
-  function onRegister() {
-    auth.register({email, password})
-      .then(() => {
-        setIsRegistered(true);
-        props.onInfoTooltip();
-        setTimeout(() => {
-          navigate('/sign-in');
-        }, 2000)
-      })
-      .catch((err) => {
-        setIsRegistered(false);
-        props.onInfoTooltip();
-        console.log(`При регистрации произошла ошибка: ${err}`);
-      })
   }
 
   // Обработчик формы
   function handleSubmit(evt) {
     evt.preventDefault();
-    onRegister();
+    props.onRegister({email, password});
   }
 
 
@@ -84,7 +60,7 @@ function Register(props) {
         isOpen={props.isOpen}
         onClose={props.onClose}
         onPopupClick={props.onPopupClick}
-        status={isRegistered}
+        status={props.isRegistered}
       />
     </>
   )

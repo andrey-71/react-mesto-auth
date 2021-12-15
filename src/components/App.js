@@ -17,6 +17,7 @@ import api from '../utils/api';
 
 
 function App() {
+  const navigate = useNavigate();
   // Стейт-переменные:
   // - данных пользователя
   const [currentUser, setCurrentUser] = React.useState({});
@@ -31,20 +32,45 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   // - процесса загрузки данных на сервер
   const [isLoading, setIsLoading] = React.useState(false);
+  // - регистрации
+  const [isRegistered, setIsRegistered] = React.useState(false);
   // - авторизации
   const [isLogged, setIsLogged] = React.useState(false);
-  // - email пользователя
+  // - почты пользователя
   const [isEmailUser, setIsEmailUser] = React.useState('');
 
+
   // Авторизация пользователя
-  function handleLogin() {
-    setIsLogged(true);
+  function handleLogin(userData) {
+    auth.authorize(userData)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          setIsLogged(true);
+          setIsEmailUser(userData.email);
+          navigate('/');
+        }
+      })
+      .catch(err => console.log(`При авторизации произошла ошибка: ${err}`));
   }
 
-  // Запись email пользователя
-  function handleEmailUser(email) {
-    setIsEmailUser(email);
+  // Регистрация пользователя
+  function handleRegister(userData) {
+    auth.register(userData)
+      .then(() => {
+        setIsRegistered(true);
+        setIsInfoTooltipPopupOpen(true);
+        setTimeout(() => {
+          navigate('/sign-in');
+        }, 2000)
+      })
+      .catch((err) => {
+        setIsRegistered(false);
+        setIsInfoTooltipPopupOpen(true);
+        console.log(`При регистрации произошла ошибка: ${err}`);
+      })
   }
+
 
   // Проверка наличия сохраненных данных пользователя и автоматическая авторизация
   React.useEffect(() => {
@@ -91,9 +117,6 @@ function App() {
   }
   const handleCardDeleteClick = (card) => {
     setIsDeleteCardPopupOpen(card);
-  }
-  const handleInfoTooltipClick = () => {
-    setIsInfoTooltipPopupOpen(true);
   }
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -207,10 +230,7 @@ function App() {
               :
               <>
                 <Header link={'/sign-up'} textAuth={'Регистрация'}/>
-                <Login
-                  onLogin={handleLogin}
-                  onEmailUser={handleEmailUser}
-                />
+                <Login onLogin={handleLogin}/>
               </>
           }/>
           {/* Страница регистрации */}
@@ -221,7 +241,8 @@ function App() {
               <>
                 <Header link={'/sign-in'} textAuth={'Войти'}/>
                 <Register
-                  onInfoTooltip={handleInfoTooltipClick}
+                  onRegister={handleRegister}
+                  isRegistered={isRegistered}
                   isOpen={isInfoTooltipPopupOpen}
                   onClose={closeAllPopups}
                   onPopupClick={handleOverlayClick}
