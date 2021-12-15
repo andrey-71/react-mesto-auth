@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthForm from './AuthForm';
 
 function Login(props) {
   // Стейты инпутов
@@ -9,6 +10,7 @@ function Login(props) {
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }
+
   function handleChangePassword(evt) {
     setPassword(evt.target.value);
   }
@@ -22,33 +24,17 @@ function Login(props) {
 
   return (
     <div className='auth auth_type_login container__auth'>
-      <h2 className='auth__title'>Вход</h2>
-      <form
-        className='auth__form auth__form_type_login'
+      <AuthForm
+        isForm={'login'}
+        isEmail={email}
+        isPassword={password}
+        onEmail={handleChangeEmail}
+        onPassword={handleChangePassword}
         onSubmit={handleSubmit}
-      >
-        <input
-          className='auth__input'
-          name='emailUser'
-          type='email'
-          placeholder='Email'
-          required
-          onChange={handleChangeEmail}
-          value={email}
-        />
-        <input
-          className='auth__input'
-          name='passwordUser'
-          type='password'
-          placeholder='Пароль'
-          required
-          onChange={handleChangePassword}
-          value={password}
-        />
-        <button className='auth__submit-button' type='submit'>Войти</button>
-      </form>
-      <div className='auth__sign-up'></div>
+        textButton={'Войти'}
+      />
 
+      <div className='auth__sign-up'></div>
     </div>
   )
 }

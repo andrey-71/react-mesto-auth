@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import AuthForm from './AuthForm';
 
 
 function Register(props) {
+
   // Стейты инпутов
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -25,31 +27,15 @@ function Register(props) {
 
   return (
     <div className='auth auth_type_registr container__auth'>
-      <h2 className='auth__title'>Регистрация</h2>
-      <form
-        className='auth__form auth__form_type_registr'
+      <AuthForm
+        isForm={'registr'}
+        isEmail={email}
+        isPassword={password}
+        onEmail={handleChangeEmail}
+        onPassword={handleChangePassword}
         onSubmit={handleSubmit}
-      >
-        <input
-          className='auth__input'
-          name='emailUser'
-          type='email'
-          placeholder='Email'
-          required
-          onChange={handleChangeEmail}
-          value={email}
-        />
-        <input
-          className='auth__input'
-          name='passwordUser'
-          type='password'
-          placeholder='Пароль'
-          required
-          onChange={handleChangePassword}
-          value={password}
-        />
-        <button className='auth__submit-button' type='submit'>Зарегистрироваться</button>
-      </form>
+        textButton={'Зарегистрироваться'}
+      />
       <div className='auth__sign-in'>
         <p className='auth__registration-request-text'>Уже зарегистрированы?</p>
         <Link to='/sign-in' className='auth__login-link'>Войти</Link>
