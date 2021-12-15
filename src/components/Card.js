@@ -16,11 +16,11 @@ function Card(props) {
 
 
   return (
-    <figure className="card">
+    <figure className='card'>
       <img
         src={props.link}
         alt={props.name}
-        className="card__image"
+        className='card__image'
         onClick={
           function handleClick() {
             props.onCardClick(props.card)
@@ -29,26 +29,26 @@ function Card(props) {
       />
       <button
         className={cardDeleteButtonClassName}
-        type="button"
-        onClick = {
+        type='button'
+        onClick={
           function handleDelete() {
             props.onCardDelete(props.card);
           }
         }
       />
-      <figcaption className="card__info">
-        <h2 className="card__caption">{props.name}</h2>
-        <div className="card__like-section">
+      <figcaption className='card__info'>
+        <h2 className='card__caption'>{props.name}</h2>
+        <div className='card__like-section'>
           <button
             className={cardLikeButtonClassName}
-            type="button"
-            onClick = {
+            type='button'
+            onClick={
               function handleLikeClick() {
                 props.onCardLike(props.card)
               }
             }
           />
-          <p className="card__like-number">{props.likes}</p>
+          <p className='card__like-number'>{props.likes}</p>
         </div>
       </figcaption>
     </figure>

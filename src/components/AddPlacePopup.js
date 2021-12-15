@@ -12,6 +12,7 @@ function AddPlacePopup(props) {
   function handleChangeName(evt) {
     setName(evt.target.value);
   }
+
   function handleChangeLink(evt) {
     setLink(evt.target.value);
   }
@@ -33,42 +34,42 @@ function AddPlacePopup(props) {
 
   return (
     <PopupWithForm
-      name = "add-card"
-      title = "Новое место"
-      textButton = "Создать"
-      isOpen = {props.isOpen}
-      isLoading = {props.isLoading}
-      onSubmit = {handleSubmit}
-      onPopupClick = {props.onPopupClick}
-      onClose = {props.onClose}
+      name='add-card'
+      title='Новое место'
+      textButton='Создать'
+      isOpen={props.isOpen}
+      isLoading={props.isLoading}
+      onSubmit={handleSubmit}
+      onPopupClick={props.onPopupClick}
+      onClose={props.onClose}
     >
-      <label className="popup__input-element">
+      <label className='popup__input-element'>
         <input
-          type="text"
-          placeholder="Название"
-          className="popup__input popup__input_type_card-name"
-          id="input-card-name"
-          name="name"
+          type='text'
+          placeholder='Название'
+          className='popup__input popup__input_type_card-name'
+          id='input-card-name'
+          name='name'
           value={name}
           onChange={handleChangeName}
           required
           minLength={2}
           maxLength={30}
         />
-        <span className="popup__input-error" id="input-card-name-error"/>
+        <span className='popup__input-error' id='input-card-name-error'/>
       </label>
-      <label className="popup__input-element">
+      <label className='popup__input-element'>
         <input
-          type="url"
-          placeholder="Ссылка на картинку"
-          className="popup__input popup__input_type_card-link"
-          id="input-card-link"
-          name="link"
+          type='url'
+          placeholder='Ссылка на картинку'
+          className='popup__input popup__input_type_card-link'
+          id='input-card-link'
+          name='link'
           value={link}
           onChange={handleChangeLink}
           required
         />
-        <span className="popup__input-error" id="input-card-link-error"/>
+        <span className='popup__input-error' id='input-card-link-error'/>
       </label>
     </PopupWithForm>
   )

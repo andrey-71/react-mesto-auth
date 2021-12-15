@@ -40,6 +40,7 @@ function App() {
   function handleLogin() {
     setIsLogged(true);
   }
+
   // Запись email пользователя
   function handleEmailUser(email) {
     setIsEmailUser(email);
@@ -48,10 +49,10 @@ function App() {
   // Проверка наличия сохраненных данных пользователя и автоматическая авторизация
   React.useEffect(() => {
     const userToken = localStorage.getItem('token');
-    if(userToken) {
+    if (userToken) {
       auth.checkToken(userToken)
         .then((res) => {
-          if(res) {
+          if (res) {
             setIsLogged(true);
             setIsEmailUser(res.data.email);
           }
@@ -202,7 +203,7 @@ function App() {
           {/* Страница авторизации */}
           <Route path='/sign-in' element={
             isLogged ?
-              <Navigate to='/' />
+              <Navigate to='/'/>
               :
               <>
                 <Header link={'/sign-up'} textAuth={'Регистрация'}/>
@@ -215,7 +216,7 @@ function App() {
           {/* Страница регистрации */}
           <Route path='/sign-up' element={
             isLogged ?
-              <Navigate to='/' />
+              <Navigate to='/'/>
               :
               <>
                 <Header link={'/sign-in'} textAuth={'Войти'}/>
