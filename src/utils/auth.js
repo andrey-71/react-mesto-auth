@@ -38,7 +38,7 @@ class Auth {
     return fetch(`${this._serverAuthUrl}/users/me`, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization' : `Bearer ${token}`
+        'Authorization': `Bearer ${token}`
       }
     })
       .then(res => this._handleResult(res))

@@ -1,5 +1,5 @@
 import React from 'react';
-import PopupWithForm from "./PopupWithForm";
+import PopupWithForm from './PopupWithForm';
 
 function DeleteCardPopup(props) {
   // Обработчик формы
@@ -10,14 +10,14 @@ function DeleteCardPopup(props) {
 
   return (
     <PopupWithForm
-      name = "delete-card"
-      title = "Вы уверены?"
-      textButton = "Да"
-      isOpen = {props.isOpen}
-      isLoading = {props.isLoading}
-      onSubmit = {handleSubmit}
-      onPopupClick = {props.onPopupClick}
-      onClose = {props.onClose}
+      name='delete-card'
+      title='Вы уверены?'
+      textButton='Да'
+      isOpen={props.isOpen}
+      isLoading={props.isLoading}
+      onSubmit={handleSubmit}
+      onPopupClick={props.onPopupClick}
+      onClose={props.onClose}
     />
   )
 }

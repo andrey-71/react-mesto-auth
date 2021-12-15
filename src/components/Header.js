@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 import logo from '../images/header-logo.svg'
 
 
@@ -21,29 +21,29 @@ function Header(props) {
           </div>
           <div className='header__user'>
             <p className='header__user-email'>{props.emailUser}</p>
-              <Link
-                to={props.link}
-                className='header__user-signout'
-                onClick={props.onSignOut}
-              >
-                {props.textAuth}
-              </Link>
-          </div>
-        </div>
-        :
-        <div className='header__content header__content_type_logout'>
-            <img
-              className='header__logo'
-              src={logo}
-              alt='Логотип Место'
-            />
             <Link
               to={props.link}
-              className='header__link'
+              className='header__user-signout'
               onClick={props.onSignOut}
             >
               {props.textAuth}
             </Link>
+          </div>
+        </div>
+        :
+        <div className='header__content header__content_type_logout'>
+          <img
+            className='header__logo'
+            src={logo}
+            alt='Логотип Место'
+          />
+          <Link
+            to={props.link}
+            className='header__link'
+            onClick={props.onSignOut}
+          >
+            {props.textAuth}
+          </Link>
         </div>
       }
 

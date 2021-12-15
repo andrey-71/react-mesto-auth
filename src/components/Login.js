@@ -1,6 +1,6 @@
 import React from 'react';
 import auth from '../utils/auth';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 function Login(props) {
   const navigate = useNavigate();
@@ -13,9 +13,11 @@ function Login(props) {
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }
+
   function handleChangePassword(evt) {
     setPassword(evt.target.value);
   }
+
   // Авторизация пользователя
   function onLogin() {
     auth.authorize({email, password})

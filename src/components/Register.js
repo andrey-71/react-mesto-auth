@@ -18,9 +18,11 @@ function Register(props) {
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }
+
   function handleChangePassword(evt) {
     setPassword(evt.target.value);
   }
+
   // Регистрация пользователя
   function onRegister() {
     auth.register({email, password})
