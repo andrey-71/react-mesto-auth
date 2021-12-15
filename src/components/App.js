@@ -12,8 +12,10 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
 import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
 import auth from '../utils/auth';
 import api from '../utils/api';
+
 
 
 function App() {
@@ -243,6 +245,12 @@ function App() {
                 <Register
                   onRegister={handleRegister}
                   isRegistered={isRegistered}
+                  isOpen={isInfoTooltipPopupOpen}
+                  onClose={closeAllPopups}
+                  onPopupClick={handleOverlayClick}
+                />
+                <InfoTooltip
+                  status={isRegistered}
                   isOpen={isInfoTooltipPopupOpen}
                   onClose={closeAllPopups}
                   onPopupClick={handleOverlayClick}

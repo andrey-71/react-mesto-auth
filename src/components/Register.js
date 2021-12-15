@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import InfoTooltip from './InfoTooltip';
 
 
 function Register(props) {
@@ -12,6 +11,7 @@ function Register(props) {
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
   }
+
   function handleChangePassword(evt) {
     setPassword(evt.target.value);
   }
@@ -24,45 +24,37 @@ function Register(props) {
 
 
   return (
-    <>
-      <div className='auth auth_type_registr container__auth'>
-        <h2 className='auth__title'>Регистрация</h2>
-        <form
-          className='auth__form auth__form_type_registr'
-          onSubmit={handleSubmit}
-        >
-          <input
-            className='auth__input'
-            name='emailUser'
-            type='email'
-            placeholder='Email'
-            required
-            onChange={handleChangeEmail}
-            value={email}
-          />
-          <input
-            className='auth__input'
-            name='passwordUser'
-            type='password'
-            placeholder='Пароль'
-            required
-            onChange={handleChangePassword}
-            value={password}
-          />
-          <button className='auth__submit-button' type='submit'>Зарегистрироваться</button>
-        </form>
-        <div className='auth__sign-in'>
-          <p className='auth__registration-request-text'>Уже зарегистрированы?</p>
-          <Link to='/sign-in' className='auth__login-link'>Войти</Link>
-        </div>
+    <div className='auth auth_type_registr container__auth'>
+      <h2 className='auth__title'>Регистрация</h2>
+      <form
+        className='auth__form auth__form_type_registr'
+        onSubmit={handleSubmit}
+      >
+        <input
+          className='auth__input'
+          name='emailUser'
+          type='email'
+          placeholder='Email'
+          required
+          onChange={handleChangeEmail}
+          value={email}
+        />
+        <input
+          className='auth__input'
+          name='passwordUser'
+          type='password'
+          placeholder='Пароль'
+          required
+          onChange={handleChangePassword}
+          value={password}
+        />
+        <button className='auth__submit-button' type='submit'>Зарегистрироваться</button>
+      </form>
+      <div className='auth__sign-in'>
+        <p className='auth__registration-request-text'>Уже зарегистрированы?</p>
+        <Link to='/sign-in' className='auth__login-link'>Войти</Link>
       </div>
-      <InfoTooltip
-        isOpen={props.isOpen}
-        onClose={props.onClose}
-        onPopupClick={props.onPopupClick}
-        status={props.isRegistered}
-      />
-    </>
+    </div>
   )
 }
 
