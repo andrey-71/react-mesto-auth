@@ -62,6 +62,7 @@ function Register(props) {
             placeholder='Email'
             required
             onChange={handleChangeEmail}
+            value={email}
           />
           <input
             className='auth__input'
@@ -70,6 +71,7 @@ function Register(props) {
             placeholder='Пароль'
             required
             onChange={handleChangePassword}
+            value={password}
           />
           <button className='auth__submit-button' type='submit'>Зарегистрироваться</button>
         </form>

@@ -52,6 +52,7 @@ function Login(props) {
           placeholder='Email'
           required
           onChange={handleChangeEmail}
+          value={email}
         />
         <input
           className='auth__input'
@@ -60,6 +61,7 @@ function Login(props) {
           placeholder='Пароль'
           required
           onChange={handleChangePassword}
+          value={password}
         />
         <button className='auth__submit-button' type='submit'>Войти</button>
       </form>
